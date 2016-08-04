@@ -2,6 +2,8 @@ from django import forms
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 
+from captcha.fields import ReCaptchaField
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30, label='Username',
@@ -15,6 +17,7 @@ class LoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
+    recaptcha = ReCaptchaField()
     retypepassword = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Retype password',
         'label': 'Retype password',

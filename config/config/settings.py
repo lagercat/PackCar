@@ -22,6 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '=nz1-f2g)4edm5_+ev)ob_!v5u(u4y4rryw(ukw)l!#m2pql+c'
 
+# RECAPTCHA
+RECAPTCHA_PUBLIC_KEY = '6LeaIiYTAAAAAPriVhHaLwfs0Vk7MQ4be7SnvkWz'
+RECAPTCHA_PRIVATE_KEY = '6LeaIiYTAAAAAM0tM0S86NfglLyTMOLnIv2aP67s'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     'authentication',
     'homepages',
     'widget_tweaks',
+    'captcha',
     'phonenumber_field',
     'drivers',
     'package'
@@ -136,6 +141,8 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
 STATIC_URL = '/static/'
+
+NOCAPTCHA = True
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticcollected")
