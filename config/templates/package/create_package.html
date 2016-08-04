@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  {% load staticfiles %}
+	  {% load widget_tweaks %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>PackCar. You deliver what you choose.</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
+    <link href="{% static "assets/css/datepicker.css" %}"rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap-datetimepicker.min.css"%}" rel="stylesheet">
+
+    <!-- Less -->
+    <link href="{% static "assets/less/datepicker.less" %}"rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "assets/css/style.css" %}"rel="stylesheet">
+    <link href="{% static "assets/css/font-awesome.min.css" %}"rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <script src="{% static "assets/js/modernizr.js"%}"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">PackCar.</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html"></a></li>
+            <li><a href="login.html">CREATE ROUTE</a></li>
+            <li><a href="login.html">COMMANDS MANAGER</a></li>
+            <li><a href="signup.html">USERNAME</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	 
+	<!-- *****************************************************************************************************************
+	 BLOG CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mtb">
+	 	<div class="row">
+	 	
+	 		<! -- BLOG POSTS LIST -->
+	 		<div class="col-lg-12">
+	 			<! -- Blog Post 1 -->
+		 		<div class="row">
+		 			<h2 class="pull-left" style="margin-right: 15px;">Create Package</h2>
+		 		</div>
+		 		<br>
+		 		<form method="post">
+				{% csrf_token %}
+		 		<div class="row">
+		 			<div class="form-group">
+		 				<div class="form-group col-lg-6">
+			 				<label>Leaving From</label>
+			 				<br>
+			 				<div class="input-group">
+    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload"></span></span>
+
+			 					{{ form.departure|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are leaving from"}}
+			 				</div>
+			 			</div>
+			 			<div class="form-group col-lg-6">
+			 				<label>Going To</label>
+			 				<br>
+			 				<div class="input-group">
+			 					{{ form.arrival|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are going to"}}
+    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-download"></span></span>
+			 				</div>
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="row">
+		 			<div class="form-group">
+		 				<div class="form-group col-lg-3">
+			 				<label>Package Height</label>
+			 				<br>
+			 				<div class="input-group">
+    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
+
+			 					 {{ form.package_height|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Package Height"}}
+			 				</div>
+			 			</div>
+			 			<div class="form-group col-lg-3">
+			 				<label>Package Width</label>
+			 				<br>
+			 				<div class="input-group">
+    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
+
+			 					{{ form.package_width|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Package Height"}}
+			 				</div>
+			 			</div>
+			 			<div class="form-group col-lg-3">
+			 				<label>Package Thickness</label>
+			 				<br>
+			 				<div class="input-group">
+    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
+
+			 					{{ form.package_thickness|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are leaving from"}}
+			 				</div>
+			 			</div>
+			 			<div class="form-group col-lg-3">
+			 				<label>Package Weight</label>
+			 				<br>
+			 				<div class="input-group">
+
+			 					{{ form.package_weight|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon2"|attr:"placeholder:Package Weight"}}
+    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-gift"></span></span>
+			 				</div>
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="row">
+		 			<div class="form-group">
+		 				<div class="form-group col-lg-6">
+			 				<label>Leaving Date</label>
+			 				<br>
+			 				<div class="input-group">
+    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
+
+			 					{{ form.departure_date|add_class:"datepicker form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Leaving Date"|attr:"id:dpd1"}}
+			 				</div>
+			 			</div>
+			 			<div class="form-group col-lg-6">
+			 				<label>Arrival Date</label>
+			 				<br>
+			 				<div class="input-group">
+
+			 					{{ form.arrival_date|add_class:"datepicker form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon2"|attr:"placeholder:Arrival Date"|attr:"id:dpd2"}}
+    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-calendar"></span></span>
+			 				</div>
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="row">
+		 			<div class="form-group">
+		 				<div class="form-group col-lg-6">
+			 				<label>Departure Time</label>
+			 				<br>
+			 				<div id="datetimepicker1" class="input-append date">
+						        <div class="input-group">
+							        <span class="add-on input-group-addon" id="basic-addon1">
+							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
+							     	</span>
+
+							        {{ form.departure_time|add_class:"form-control"|attr:"required:required"|attr:"placeholder:Pick up the arrival time Departure Time"}}
+							    </div>
+						    </div>
+			 			</div>
+			 			<div class="form-group col-lg-6">
+			 				<label>Arrival Time</label>
+			 				<br>
+			 				<div id="datetimepicker2" class="input-append date">
+						        <div class="input-group">
+
+							        {{ form.arrival_time|add_class:"form-control"|attr:"required:required"|attr:"placeholder:Pick up the arrival time"}}
+							        <span class="add-on input-group-addon" id="basic-addon1">
+							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
+							     	</span>
+							    </div>
+						    </div>
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="row">
+		 			<div class="form-group col-lg-12">
+		 				<label>Phone Number</label>
+			 			<br>
+			 			<div class="input-group">
+    						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-phone"></span></span>
+
+			 				{{ form.phonenumber|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Enter your phone number (ex. +40792111222)"}}
+
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="row">
+		 			<div class="form-group col-lg-12">
+		 				<label>Price</label>
+			 			<br>
+			 			<div class="input-group">
+    						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-euro"></span></span>
+			 				{{ form.price|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Enter the price in EUR"}}
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
+		 		<div class="col-lg-12 row">
+		 			<input type="submit" class="btn btn-success" />
+		 		</div>
+		 		</form>
+			</div><! --/col-lg-12 -->
+	 		
+	 	</div><! --/row -->
+	 </div><! --/container -->
+
+
+	<!-- *****************************************************************************************************************
+	 FOOTER
+	 ***************************************************************************************************************** -->
+	 <div id="footerwrap">
+	 	<div class="container">
+		 	<div class="row">
+		 		<div class="col-lg-6 col-md-6 col-sm-12">
+		 			<h4>About</h4>
+		 			<div class="hline-w"></div>
+		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 		</div>
+		 		<div class="col-lg-6 col-md-6 col-sm-12">
+		 			<h4>Social Links</h4>
+		 			<div class="hline-w"></div>
+		 			<p>
+		 				<a href="#"><i class="fa fa-dribbble"></i></a>
+		 				<a href="#"><i class="fa fa-facebook"></i></a>
+		 				<a href="#"><i class="fa fa-twitter"></i></a>
+		 				<a href="#"><i class="fa fa-instagram"></i></a>
+		 				<a href="#"><i class="fa fa-tumblr"></i></a>
+		 			</p>
+		 		</div>
+		 	
+		 	</div><! --/row -->
+	 	</div><! --/container -->
+	 </div><! --/footerwrap -->
+	 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "assets/js/retina-1.1.0.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverdir.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverex.min.js" %}"></script>
+	<script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
+  	<script src="{% static "assets/js/jquery.isotope.min.js" %}"></script>
+
+  	<!-- Date Picker -->
+  	<script src="{% static "assets/js/bootstrap-datepicker.js" %}"></script>
+	<script src="{% static "assets/js/custom.js" %}"></script>
+	<script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script> 
+    <script type="text/javascript"
+     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+	<script type="text/javascript">
+		$('#datetimepicker1').datetimepicker({
+			format: 'hh:mm:ss',
+			language: 'eng',
+			pickDate: false
+		});
+	</script>
+	<script type="text/javascript">
+		$('#datetimepicker2').datetimepicker({
+			format: 'hh:mm:ss',
+			language: 'eng',
+			pickDate: false
+		});
+	</script>
+
+
+  </body>
+</html>
