@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'homepages',
+    'widget_tweaks',
+    'phonenumber_field',
+    'drivers'
 ]
 
 MIDDLEWARE_CLASSES = [
