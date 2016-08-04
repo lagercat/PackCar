@@ -41,7 +41,7 @@
             <li class="active"><a href="/"></a></li>
             <li><a href="login.html">CREATE ROUTE</a></li>
             <li><a href="login.html">COMMANDS MANAGER</a></li>
-            <li><a href="signup.html">USERNAME</a></li>
+            <li><a href="signup.html">{{ request.user.username }}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -77,6 +77,21 @@
 						<p><b>Weight: </b> {{ pack.package_weight }} cm</p>
 			 			<p><b>Price: </b> 50RON</p>
 			 			<p><a href="/package/{{ pack.slug }}">[View Box]</a></p>
+			 		</div>
+			 	</div>
+		 		<div class="spacing"></div>
+				{% endfor %}
+				{% else %}
+				{% for driver in drivers %}
+				<div class="row">
+			 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			 			<p><img class="img-responsive" style="height:200px;" src="{% static "assets/img/post02.jpg" %}"></p>
+			 		</div>
+			 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			 			<a href="single-post.html"><h3 class="ctitle">{{ driver.departure }} - {{ driver.arrival }}</h3></a>
+			 			<p> <csmall2>By: {{ driver.author }}</csmall2></p>
+			 			<p><b>Phone Number: </b> {{ driver.phonenumber }}</p>
+			 			<p><a href="/driver/{{ driver.slug }}">[View Car]</a></p>
 			 		</div>
 			 	</div>
 		 		<div class="spacing"></div>
