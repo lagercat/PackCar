@@ -1,1 +1,1 @@
-# OpenInfoEducatie
+# Open Info Educatie
