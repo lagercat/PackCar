@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import PackageForm
 from .models import Package
 
 
+@login_required
 def submit_package(request):
     form = PackageForm(data=request.POST or None)
     if request.method == "POST":
@@ -14,6 +16,7 @@ def submit_package(request):
         'form': form})
 
 
+@login_required
 def list_packages(request):
     packages = Package.objects.order_by("-id").all()
     return render(request, "list.html", {
@@ -21,6 +24,7 @@ def list_packages(request):
         "packages": packages})
 
 
+@login_required
 def package(request, slug):
     package = Package.get_object_or_404(Package, slug=slug)
     return render(request, "template.html", {

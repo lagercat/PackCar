@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import DriverForm
+from .models import Driver
 
 
+@login_required
 def submit_driver(request):
     form = DriverForm(data=request.POST or None)
     if request.method == "POST":
@@ -11,3 +14,20 @@ def submit_driver(request):
             form.save()
     return render(request, "template_here", {
         'form': form})
+
+
+@login_required
+def list_drivers(request):
+    drivers = Driver.objects.order_by("-id").all()
+    return render(request, "list.html", {
+        "type": "Drivers",
+        "drivers": drivers
+    })
+
+
+@login_required
+def driver(request, slug):
+    drivers = Driver.get_object_or_404(Driver, slug=slug)
+    return render(request, "template.html", {
+        "driver": drivers
+    })
