@@ -12,3 +12,6 @@ class Package(models.Model):
     departure_date = models.DateField(null=True)
     arrival_date = models.DateField(null=True)
     author = models.ForeignKey(User, related_name='packages')
+    package_width = models.FloatField(null=True)
+    package_height = models.FloatField(null=True)
+    package_thickness = models.FloatField(null=True)
