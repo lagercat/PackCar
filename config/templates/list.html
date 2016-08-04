@@ -71,11 +71,12 @@
 			 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			 			<a href="single-post.html"><h3 class="ctitle">{{ pack.departure }} - {{ pack.arrival }}</h3></a>
 						<p><csmall2>By: {{ pack.author.username }}</csmall2></p>
-			 			<p><b>Height: </b> {{ pack.height }}cm</p>
-			 			<p><b>Weigth: </b> {{ pack.weight }}cm</p>
-			 			<p><b>Thickness: </b> {{ pack.thickness }}cm</p>
+			 			<p><b>Height: </b> {{ pack.package_height }} cm</p>
+			 			<p><b>Width: </b> {{ pack.package_width }} cm</p>
+			 			<p><b>Thickness: </b> {{ pack.package_thickness }} cm</p>
+						<p><b>Weight: </b> {{ pack.package_weight }} cm</p>
 			 			<p><b>Price: </b> 50RON</p>
-			 			<p><a href="post.html">[View Box]</a></p>
+			 			<p><a href="/package/{{ pack.slug }}">[View Box]</a></p>
 			 		</div>
 			 	</div>
 		 		<div class="spacing"></div>
