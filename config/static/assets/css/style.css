@@ -467,3 +467,18 @@ csmall2 {
 	float:left;
 	font-family:Helvetica;
 }
+
+.form-login{
+	color: #fff !important;
+}
+
+
+#choose-package:hover{
+	background-color: #dfe9f5;
+	cursor: pointer;
+}
+
+#choose-car:hover{
+	background-color: #dfe9f5;
+	cursor: pointer;
+}
