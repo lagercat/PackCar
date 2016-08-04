@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+	  {% load staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,20 +9,20 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
-    <title>Title</title>
+    <title>PackCar. You deliver what you choose.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
 
     <!-- Materialize CSS -->
-    <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static "assets/css/materialize.min.css" %}" media="screen,projection"/>
 
     <!-- Custom styles -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+    <link href={% static "assets/css/font-awesome.min.css" %}" rel="stylesheet">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
-    <script src="assets/js/modernizr.js"></script>
+    <script src="{% static "assets/js/modernizr.js" %}"></script>
   </head>
 
   <body>
@@ -36,22 +37,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">TITLE.</a>
+          <a class="navbar-brand" href="index.html">PackCar.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">HOME</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">PAGES <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="blog.html">BLOG</a></li>
-                <li><a href="single-post.html">SINGLE POST</a></li>
-                <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="single-project.html">SINGLE PROJECT</a></li>
-              </ul>
-            </li>
+            <li class="active"><a href="index.html"></a></li>
+            <li><a href="about.html"></a></li>
+            <li><a href="contact.html"></a></li>
+            <li><a href="/">LOG IN</a></li>
+            <li style="color:#fff;"><a>|</a></li>
+            <li><a href="signup.html">SIGN UP</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -64,11 +59,11 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h2 style="color:#fff;">Title and staffs</h2>
-					<h5 style="color:#384452;">And here comes a short description or a short motto of our service.</h5>
+					<h2 style="color:#fff;">PackCar</h2>
+					<h5 style="color:#384452;">Your online platform for delivering and sending Packages via Cars.</h5>
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 himg">
-					<img src="assets/img/index.jpg" class="img-responsive">
+					<img src="{% static "assets/img/vectors/logo/logo.png" %}"class="img-responsive">
 				</div>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
@@ -84,19 +79,16 @@
  					<i class="fa fa-heart-o"></i>
  					<h5 style="color:#384452; font-weight:bold;">Find Your Perfect Car</h5>
  					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
- 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
  				</div>
  				<div class="col-md-4">
  					<i class="fa fa-flask"></i>
  					<h5 style="color:#384452; font-weight:bold;">Find Your Perfect Delivery</h5>
  					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
- 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
  				</div>
  				<div class="col-md-4">
  					<i class="fa fa-trophy"></i>
  					<h5 style="color:#384452; font-weight:bold;">Enjoy The Service</h5>
  					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
- 					<p><br/><a href="#" class="btn btn-theme">More Info</a></p>
  				</div>		 				
 	 		</div>
 	 	</div><! --/container -->
@@ -112,7 +104,7 @@
 	        <div class="card-panel grey lighten-5 z-depth-1" style="padding: 20px 10px 1px 40px !important;">
 	          <div class="row valign-wrapper">
 	            <div class="col s2">
-	              <img src="assets/img/thumb03.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+	              <img src="{% static "assets/img/thumb03.jpg" %}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 	              <h6>John Smith</h6>
 	            </div>
 	            <div class="col s10">
@@ -128,7 +120,7 @@
 	        <div class="card-panel grey lighten-5 z-depth-1" style="padding: 20px 10px 1px 40px !important;">
 	          <div class="row valign-wrapper">
 	            <div class="col s2">
-	             <img src="assets/img/thumb01.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+	             <img src="{% static "assets/img/thumb01.jpg" %}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 	             <h6>John Smith</h6>
 	            </div>
 	            <div class="col s10">
@@ -144,7 +136,7 @@
 	        <div class="card-panel grey lighten-5 z-depth-1" style="padding: 20px 10px 1px 40px !important;">
 	          <div class="row valign-wrapper">
 	            <div class="col s2">
-	              <img src="assets/img/thumb02.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+	              <img src="{% static "assets/img/thumb02.jpg" %}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
 	              <h6>John Smith</h6>
 	            </div>
 	            <div class="col s10">
@@ -216,10 +208,10 @@
 			 	<div class="col-lg-3 col-md-3 col-sm-3">
 			 	</div>
 			 	<div class="col-lg-3 col-md-3 col-sm-3">
-			 		<img src="assets/img/parteners/logoB.png" class="spartan-sponsor img-responsive"><br><span style="float:left;">SpartanTasks</span>
+			 		<img src="{% static "assets/img/parteners/logoB.png" %}"class="spartan-sponsor img-responsive"><br><span style="float:left;">SpartanTasks</span>
 			 	</div>
 			 	<div class="col-lg-3 col-md-3 col-sm-3">
-			 		<img src="assets/img/parteners/logo.gif" class="img-responsive">
+			 		<img src="{% static "assets/img/parteners/logo.gif" %}" class="img-responsive">
 			 	</div>
 			 	<div class="col-lg-3 col-md-3 col-sm-3">
 			 	</div>
@@ -253,15 +245,15 @@
 	 
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/retina-1.1.0.js"></script>
-	<script src="assets/js/jquery.hoverdir.js"></script>
-	<script src="assets/js/jquery.hoverex.min.js"></script>
-	<script src="assets/js/jquery.prettyPhoto.js"></script>
-  	<script src="assets/js/jquery.isotope.min.js"></script>
-  	<script src="assets/js/custom.js"></script>
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+	<script src="{% static "assets/js/retina-1.1.0.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverdir.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverex.min.js" %}"></script>
+	<script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
+  	<script src="{% static "assets/js/jquery.isotope.min.js" %}"></script>
+  	<script src="{% static "assets/js/custom.js" %}"></script>
+  	<script type=text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script type="text/javascript" src="{% static "js/materialize.min.js" %}"></script>
 
 
     <script>
