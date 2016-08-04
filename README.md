@@ -11,5 +11,5 @@ cls IX-a, Liceul Teoretic "G.Moisil" Timisoara
 backend developer
 
 * Silaghi Fineas
-cls IX-a, Colegiul National Ana Aslan Timisoara
+cls IX-a, Colegiul National "Ana Aslan" Timisoara
 frontend developer
