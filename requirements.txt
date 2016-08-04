@@ -1,3 +1,4 @@
 django
 django-widget-tweaks
 psycopg2==2.6.1
+django-phonenumber-field==1.1.0
