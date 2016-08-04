@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .forms import PackageForm
 from .models import Package
@@ -19,3 +19,10 @@ def list_packages(request):
     return render(request, "list.html", {
         "type": "Packages",
         "packages": packages})
+
+
+def package(request, slug):
+    package = Package.get_object_or_404(Package, slug=slug)
+    return render(request, "template.html", {
+        "package": package
+    })
