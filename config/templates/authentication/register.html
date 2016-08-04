@@ -81,10 +81,11 @@
 					   {% for error in form.username.errors %}
                               {{ error }}
                        {% endfor %}
+                       </div>
 					{% endif %}
 
 
-					<br><br>
+					<br>
 					<!-- Secound Label -->
 					<label>E-mail</label>
 					<div class="input-group">
@@ -100,9 +101,10 @@
 					   {% for error in form.email.errors %}
                               {{ error }}
                        {% endfor %}
+                       </div>
 					{% endif %}
 
-					<br><br>
+					<br>
 					<!-- Third Label -->
 					<label>Password</label>
 					<div class="input-group">
@@ -119,9 +121,10 @@
 					   {% for error in form.username.errors %}
                               {{ error }}
                        {% endfor %}
+                       </div>
 					{% endif %}
 
-					<br><br>
+					<br>
 					<!-- Fourth Label -->
 					<label>Re-enter Password</label>
 					<div class="input-group">
@@ -140,7 +143,7 @@
                        {% endfor %}
                        </div>
 					{% endif %}
-					<br><br>
+					<br>
 					<div>
 						<input class="btn btn-default" type="submit" placeholder="Submit">
 					</div>
