@@ -38,7 +38,9 @@
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html"></a></li>
-            <li><a>{{ request.user.username }}</a></li>
+            <li><a>Hello {{ user.username }}   !</a></li>
+            <li><a>|</a></li>
+            <li><a href="/logout">LOG OUT</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

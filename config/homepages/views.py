@@ -9,4 +9,6 @@ def home(request):
         template = 'homepages/home.html'
     else:
         template = 'homepages/index.html'
-    return render_to_response(template)
+    return render_to_response(template,{
+            'user': request.user,
+            })
