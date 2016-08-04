@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import uuid
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -15,3 +16,4 @@ class Driver(models.Model):
     arrival_time = models.TimeField(null=True)
     phonenumber = PhoneNumberField(null=True)
     author = models.ForeignKey(User, related_name='drivers')
+    slug = models.SlugField(default=uuid.uuid1, unique=True)

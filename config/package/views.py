@@ -1,9 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .forms import PackageForm
+from .models import Package
 
 
-def submit_driver(request):
+@login_required
+def submit_package(request):
     form = PackageForm(data=request.POST or None)
     if request.method == "POST":
         if form.is_valid():
@@ -11,3 +14,19 @@ def submit_driver(request):
             form.save()
     return render(request, "template_here", {
         'form': form})
+
+
+@login_required
+def list_packages(request):
+    packages = Package.objects.order_by("-id").all()
+    return render(request, "list.html", {
+        "type": "Packages",
+        "packages": packages})
+
+
+@login_required
+def package(request, slug):
+    package = Package.get_object_or_404(Package, slug=slug)
+    return render(request, "template.html", {
+        "package": package
+    })

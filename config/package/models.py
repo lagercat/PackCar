@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+import uuid
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -15,3 +16,6 @@ class Package(models.Model):
     package_width = models.FloatField(null=True)
     package_height = models.FloatField(null=True)
     package_thickness = models.FloatField(null=True)
+    package_weight = models.FloatField(null=True)
+    price = models.IntegerField(null=True)
+    slug = models.SlugField(default=uuid.uuid1, unique=True)
