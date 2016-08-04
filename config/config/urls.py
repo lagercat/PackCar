@@ -24,8 +24,5 @@ urlpatterns = [
     url(r'^', include('authentication.urls')),
     url(r'^', include('homepages.urls')),
     url(r'^', include('drivers.urls')),
+    url(r'^', include('package.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-
-
-
