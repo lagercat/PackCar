@@ -39,6 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'authentication',
+    'homepages',
+    'widget_tweaks',
+    'phonenumber_field',
+    'drivers',
+    'package'
+
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -57,10 +63,14 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + '/templates/'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
+                'config.context_processors.template_context',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -77,12 +87,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'open',
+       'USER': 'myusername',
+       'PASSWORD': 'mypassword',
+       'HOST': 'localhost',
+       'PORT': '',
+   }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -123,8 +136,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
-
 STATIC_URL = '/static/'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticcollected")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
