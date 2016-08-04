@@ -2,11 +2,19 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.contrib.auth import logout
 
 from .forms import LoginForm, UserRegisterForm
 
 
 # Create your views here.
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('home'))
+
 
 @login_required
 def login_page(request):
