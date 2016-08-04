@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      {% load staticfiles %}
+	        {% load staticfiles %}
       {% load widget_tweaks %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,21 +13,20 @@
     <title>PackCar. You deliver what you choose.</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.css" %}"rel="stylesheet">
 
-    <!-- Materialize CSS --><!-- 
-    <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/>
-    <link type="text/css" rel="stylesheet" href="assets/css/materialize.css"  media="screen,projection"/> -->
+    <!-- Materialize CSS -->
+    <!-- <link type="text/css" rel="stylesheet" href="assets/css/materialize.min.css"  media="screen,projection"/> -->
 
     <!-- Custom styles -->
-    <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
-    <link href="{% static "assets/css/font-awesome.min.css" %}"rel="stylesheet">
+    <link href="{% static "assets/css/style.css" %}"rel="stylesheet">
+    <link href="{% static "assets/css/font-awesome.min.css" rel="stylesheet" %}">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <script src="{% static "assets/js/modernizr.js" %}"></script>
   </head>
 
-  <body style="background-color: #00b3fe">
+  <body  style="background-color: #00b3fe">
 
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -39,16 +38,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">PackCar.</a>
+          <a class="navbar-brand" href="index.html">PackCar.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html"></a></li>
             <li><a href="about.html"></a></li>
             <li><a href="contact.html"></a></li>
-            <li><a href="/login">LOG IN</a></li>
+            <li><a href="login.html">LOG IN</a></li>
             <li style="color:#fff;"><a>|</a></li>
-            <li><a href="/register">SIGN UP</a></li>
+            <li><a href="signup.html">SIGN UP</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -61,67 +60,108 @@
 	    <div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h2 style="color:#fff;font-size: 3.56em !important;line-height: 110% !important;margin-bottom: 6%;font-weight:700 !important; font-family:'Raleway' !important;">Log In</h2>
+					<h2 style="color:#fff;font-size: 3.56em !important;line-height: 110% !important;margin-bottom: 6%;font-weight:700 !important; font-family:'Raleway' !important;">Sign Up</h2>
 				</div>
 				<div class="col-lg-8 col-lg-offset-2 himg">
 				<form method="post">
 				{% csrf_token %}
+					<!-- First Label -->
 					<label>Username</label>
 					<div class="input-group">
 					  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
-					   {{ form.username|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
+
+					  {{ form.username|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
 					</div>
+
+					{% if form.username.errors %}
 					<br>
-					{% if errors %}
-				    {% for error in errors %}
 					<div class="alert alert-danger alert-dismissible" role="alert">
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Warning!</strong> {{ error }}
+					  <strong>Warning!</strong>
+					   {% for error in form.username.errors %}
+                              {{ error }}
+                       {% endfor %}
+					{% endif %}
+
+
+					<br><br>
+					<!-- Secound Label -->
+					<label>E-mail</label>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-envelope"></span></span>
+
+					  {{ form.email|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
 					</div>
-					{% endfor %}
-				    {% endif %}
+					{% if form.email.errors %}
 					<br>
-					<br>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong>
+					   {% for error in form.email.errors %}
+                              {{ error }}
+                       {% endfor %}
+					{% endif %}
+
+					<br><br>
+					<!-- Third Label -->
 					<label>Password</label>
 					<div class="input-group">
 					  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-ban-circle"></span></span>
-                       {{ form.password|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
+
+					  {{ form.password|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
 					</div>
 					<br>
-					{% if errors %}
-				    {% for error in errors %}
+					{% if form.password.errors %}
+					<br>
 					<div class="alert alert-danger alert-dismissible" role="alert">
 					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					  <strong>Warning!</strong> {{ error }}
+					  <strong>Warning!</strong>
+					   {% for error in form.username.errors %}
+                              {{ error }}
+                       {% endfor %}
+					{% endif %}
+
+					<br><br>
+					<!-- Fourth Label -->
+					<label>Re-enter Password</label>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-ban-circle"></span></span>
+
+					  {{ form.retypepassword|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"}}
 					</div>
-					{% endfor %}
-				    {% endif %}
+					<br>
+					{% if form.retypepassword.errors %}
+					<br>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong>
+					   {% for error in form.retypepassword.errors %}
+                              {{ error }}
+                       {% endfor %}
+                       </div>
+					{% endif %}
 					<br><br>
 					<div>
-
-					    <input type="submit" value="Log In" class="btn btn-default">
-
+						<input class="btn btn-default" type="submit" placeholder="Submit">
 					</div>
-				</form>
+					<br><br>
+					</form>
 				</div>
 			</div><!-- /row -->
 	    </div> <!-- /container -->
 	</div><!-- /headerwrap -->
-
-	
 	 
     <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
-	<script src="{% static "assets/js/retina-1.1.0.js" %}"></script>
-	<script src="{% static "assets/js/jquery.hoverdir.js"%}"></script>
-	<script src="{% static "assets/js/jquery.hoverex.min.js"%}"></script>
-	<script src="{% static "assets/js/jquery.prettyPhoto.js"%}"></script>
-  	<script src="{% static "assets/js/jquery.isotope.min.js"%}"></script>
-  	<script src="{% static "assets/js/custom.js"%}"></script>
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"%}"></script>
-    <script type="text/javascript" src="{% static "js/materialize.min.js"%}"></script>
-    <script type="text/javascript" src="{% static "js/materialize.js"%}"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/retina-1.1.0.js"></script>
+	<script src="assets/js/jquery.hoverdir.js"></script>
+	<script src="assets/js/jquery.hoverex.min.js"></script>
+	<script src="assets/js/jquery.prettyPhoto.js"></script>
+  	<script src="assets/js/jquery.isotope.min.js"></script>
+  	<script src="assets/js/custom.js"></script>
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script type="text/javascript" src="js/materialize.min.js"></script>
 
 
     <script>
