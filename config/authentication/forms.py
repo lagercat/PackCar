@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import validate_email
 from django.contrib.auth.models import User
 
 
@@ -21,13 +22,23 @@ class UserRegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'email',  'password']
         widgets = {
             'username': forms.TextInput({'required': 'required',
                                          'placeholder': 'Username'}),
+            'email': forms.EmailInput({'required': 'required',
+                                       'placeholder': 'Email'}),
             'password': forms.PasswordInput(attrs={'required': 'required',
                                                    'placeholder': 'Password'})
         }
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if validate_email(email):
+            raise forms.ValidationError("Email is not valid")
+        elif User.objects.filter(email=email):
+            raise forms.ValidationError("This email already exists")
+        return email
 
     def clean_username(self):
         user_name = self.cleaned_data['username']
