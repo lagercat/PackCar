@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'homepages',
     'widget_tweaks',
     'phonenumber_field',
-    'drivers'
+    'drivers',
+    'package'
 ]
 
 MIDDLEWARE_CLASSES = [
