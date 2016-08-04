@@ -21,6 +21,7 @@ class DriverForm(forms.ModelForm):
         if not data['departure'][1:].islower():
             raise forms.ValidationError("The only capital letter should"
                                         "be the first one")
+        return data['departure']
 
     def clean_arrival(self):
         data = self.cleaned_data
@@ -30,11 +31,13 @@ class DriverForm(forms.ModelForm):
         if not data['departure'][1:].islower():
             raise forms.ValidationError("The only capital letter should"
                                         "be the first one")
+        return data['arrival']
 
     def clean_departure_date(self):
         data = self.cleaned_data
         if data['departure_date'] < date.now():
             raise forms.ValidationError("Enter a valid date")
+        return data['departure_date']
 
     def clean_arrival_date(self):
         data = self.cleaned_data
@@ -43,3 +46,13 @@ class DriverForm(forms.ModelForm):
         elif data['arrival_date'] < data['departure_date']:
             raise forms.ValidationError("Arrival can't be"
                                         "before departure date")
+        return data['arrival_date']
+
+    def clean_arrival_time(self):
+        data = self.cleaned_data
+        if data['arrival'] == data['departure']:
+            if data['arrival_time'] > data['departure_time']:
+                raise forms.ValidationError("If departure and arrival"
+                                            "are at the same date arrival"
+                                            "time should be after departure"
+                                            "time")
