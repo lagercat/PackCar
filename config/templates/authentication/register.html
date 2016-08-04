@@ -144,6 +144,18 @@
                        </div>
 					{% endif %}
 					<br>
+					 <center>{{form.recaptcha|attr:"required:required"}}</center>
+					 {% if form.recaptcha.errors %}
+					<br>
+					<div class="alert alert-danger alert-dismissible" role="alert">
+					  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					  <strong>Warning!</strong>
+					   {% for error in form.recaptcha.errors %}
+                              {{ error }}
+                       {% endfor %}
+                       </div>
+					{% endif %}
+					 <br>
 					<div>
 						<input class="btn btn-default" type="submit" placeholder="Submit">
 					</div>

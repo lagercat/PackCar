@@ -121,7 +121,7 @@ a:focus {
 }
 
 .dropdown-menu {
-	background: #384452;
+	background: #fff;
 }
 
 .dropdown-menu > li > a {
@@ -481,4 +481,25 @@ csmall2 {
 #choose-car:hover{
 	background-color: #dfe9f5;
 	cursor: pointer;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    line-height: 14px;
+    vertical-align: text-top;
+    background-image: url("../img/thumb03.jpg");
+    background-position: 14px 14px;
+    background-repeat: no-repeat;
+}
+
+.icon-chevron-up {
+    background-position: -288px -120px;
+}
+
+.btn {
+    border-color: #c5c5c5;
+    border-color: rgba(0,0,0,0.15) rgba(0,0,0,0.15) rgba(0,0,0,0.25);
 }
