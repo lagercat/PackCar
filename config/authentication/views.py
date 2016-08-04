@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from .forms import LoginForm
+from .forms import LoginForm, UserRegisterForm
 
 
 # Create your views here.
@@ -28,3 +28,18 @@ def login_page(request):
     return render(request, "authentication/logIn.html", {
         'form': form,
         'errors': errors})
+
+
+def register_page(request):
+    form = UserRegisterForm(data=request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.instance.set_password(form.cleaned_data['password'])
+            form.save()
+            user = authenticate(username=form.instance.username,
+                                password=form.cleaned_data['password'])
+            login(request, user)
+            return redirect('/')
+    return render(request, "authentication/register.html", {
+        'form': form,
+    })
