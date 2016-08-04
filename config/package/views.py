@@ -14,7 +14,8 @@ def submit_package(request):
             form.save()
             return redirect('/')
     return render(request, "package/create_package.html", {
-        'form': form})
+        'form': form,
+        'user': request.user})
 
 
 @login_required
