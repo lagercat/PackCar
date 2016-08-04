@@ -16,26 +16,28 @@ def logout_view(request):
     return redirect(reverse('home'))
 
 
-@login_required
 def login_page(request):
-    errors = []
-    form = LoginForm(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'],
-                                password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('/')
+    if request.user.is_authenticated():
+        return redirect('/')
+    else:
+        errors = []
+        form = LoginForm(request.POST)
+        if request.method == 'POST':
+            if form.is_valid():
+                user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password'])
+                if user is not None:
+                    login(request, user)
+                    return redirect('/')
+
+                else:
+                    errors.append('Incorrect username or password')
 
             else:
-                errors.append('Incorrect username or password')
-
-        else:
-            errors.append('Invalid form')
-    return render(request, "authentication/logIn.html", {
-        'form': form,
-        'errors': errors})
+                errors.append('Invalid form')
+        return render(request, "authentication/logIn.html", {
+            'form': form,
+            'errors': errors})
 
 
 def register_page(request):
