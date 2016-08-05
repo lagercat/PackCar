@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
-from .forms import PackageForm
+from django.http import HttpResponseForbidden
+
+from .forms import PackageForm,EditPackageForm
 from .models import Package
 
 
@@ -59,3 +61,20 @@ def accept(request):
         
         return HttpResponse(json.dumps(context),
                             content_type='application/json')
+
+
+@login_required
+def edit_package(request, slug):
+    post = get_object_or_404(Package, slug=slug)
+    if post.author != request.user:
+        return HttpResponseForbidden()
+    form = EditPackageForm(request.POST or None, request.FILES or None,
+                        instance=post)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('/package/' + post.slug)
+    return render(request, 'package/edit_package.html', {
+        'post': post,
+        'form': form,
+    })

@@ -73,9 +73,10 @@
 		 		<p style="font-size:20px;"><b>Date:</b>{{ package.departure_date }}  </a><b  style="margin-left:20px;"> To:</b> {{ package.arrival_date }}</a></p>
 		 		<p style="font-size:20px;"><b>Time:</b> {{ package.departure_time }}</a><b  style="margin-left:20px;"> To:</b>{{ package.arrival_time }}</a></p>
 				<h4>Phone: <span style="font-weight:normal;color:#ff0c4d;">{{ package.phonenumber}}</span></h4>
-		 	    <div class="col-lg-12 row">
-		 			<button type="submit" name="deletePost" value='deletePost' style="margin-right:5px" class="btn btn-danger"><span>Delete </span></button>
-		 	    </div>
+		 	    {% if user == package.author%}
+                      <button  class=" btn btn-success" style="margin-right:5px"><a href="/edit_package/{{ package.slug }}" style="color: white;">Edit task </a></button>
+                      <button type="submit" name="deletePost" value='deletePost' style="margin-right:5px" class="btn btn-danger"><span>Delete </span></button>
+                 {% endif %}
 
 		 	</div>
 		 	
