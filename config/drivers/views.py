@@ -28,7 +28,7 @@ def list_drivers(request):
 
 @login_required
 def driver(request, slug):
-    drivers = Driver.get_object_or_404(Driver, slug=slug)
-    return render(request, "template.html", {
-        "driver": drivers
+    drivers = get_object_or_404(Driver, slug=slug)
+    return render(request, "drivers/post.html", {
+        "package": drivers
     })

@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'^drivers/', views.submit_driver, name="submit_driver"),
-    url(r'^alldrivers/', views.list_drivers, name="list_drivers")
+    url(r'^alldrivers/', views.list_drivers, name="list_drivers"),
+    url(r'^driver/(?P<slug>[^\.]+)/$', views.driver, name='driver')
 ]
