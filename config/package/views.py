@@ -33,6 +33,10 @@ def list_packages(request):
 @login_required
 def package(request, slug):
     package = get_object_or_404(Package, slug=slug)
+    if request.method == 'POST':
+        if request.POST.get("deletePost") and package.author == request.user:
+            package.delete()
+            return redirect('/')
     return render(request, "package/post.html", {
         "package": package
     })
