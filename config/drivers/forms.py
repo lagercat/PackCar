@@ -43,7 +43,7 @@ class DriverForm(forms.ModelForm):
         data = self.cleaned_data
         if data['arrival_date'] < date.today():
             raise forms.ValidationError("Enter a valid date")
-        elif data['arrival_date'] < data['departure_date']:
+        elif data['arrival_date'] > data['departure_date']:
             raise forms.ValidationError("Arrival can't be"
                                         " before departure date")
         return data['arrival_date']

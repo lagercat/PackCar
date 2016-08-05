@@ -32,8 +32,8 @@ def list_packages(request):
 
 @login_required
 def package(request, slug):
-    package = Package.get_object_or_404(Package, slug=slug)
-    return render(request, "template.html", {
+    package = get_object_or_404(Package, slug=slug)
+    return render(request, "package/post.html", {
         "package": package
     })
 
