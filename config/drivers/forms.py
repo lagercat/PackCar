@@ -13,6 +13,17 @@ class DriverForm(forms.ModelForm):
                   'departure_time', 'arrival_date', 'arrival_time',
                   'phonenumber']
 
+        def clean_arrival_time(self):
+            data = self.cleaned_data
+            if data['arrival'] == data['departure']:
+                if data['arrival_time'] > data['departure_time']:
+                    raise forms.ValidationError("If departure and arrival"
+                                                " are at the same date arrival"
+                                                " time should be after"
+                                                " departure"
+                                                " time")
+            return data['arrival_time']
+
     def clean_departure(self):
         data = self.cleaned_data
         if not data['departure'][0].isupper():
@@ -47,16 +58,6 @@ class DriverForm(forms.ModelForm):
             raise forms.ValidationError("Arrival can't be"
                                         " before departure date")
         return data['arrival_date']
-
-    def clean_arrival_time(self):
-        data = self.cleaned_data
-        if data['arrival'] == data['departure']:
-            if data['arrival_time'] > data['departure_time']:
-                raise forms.ValidationError("If departure and arrival"
-                                            " are at the same date arrival"
-                                            " time should be after departure"
-                                            " time")
-        return data['arrival_time']
 
 
 class EditDriverForm(forms.ModelForm):
@@ -66,6 +67,16 @@ class EditDriverForm(forms.ModelForm):
         fields = ['departure', 'arrival', 'departure_date',
                   'departure_time', 'arrival_date', 'arrival_time',
                   'phonenumber']
+        
+    def clean_arrival_time(self):
+        data = self.cleaned_data
+        if data['arrival'] == data['departure']:
+            if data['arrival_time'] > data['departure_time']:
+                raise forms.ValidationError("If departure and arrival"
+                                            " are at the same date arrival"
+                                            " time should be after departure"
+                                            " time")
+        return data['arrival_time']
 
     def clean_departure(self):
         data = self.cleaned_data
@@ -101,13 +112,3 @@ class EditDriverForm(forms.ModelForm):
             raise forms.ValidationError("Arrival can't be"
                                         " before departure date")
         return data['arrival_date']
-
-    def clean_arrival_time(self):
-        data = self.cleaned_data
-        if data['arrival'] == data['departure']:
-            if data['arrival_time'] > data['departure_time']:
-                raise forms.ValidationError("If departure and arrival"
-                                            " are at the same date arrival"
-                                            " time should be after departure"
-                                            " time")
-        return data['arrival_time']

@@ -14,6 +14,7 @@ def submit_driver(request):
             form.instance.author = request.user
             form.save()
             return redirect('/')
+    print form.errors
     return render(request, "drivers/create-route.html", {
         'form': form})
 
