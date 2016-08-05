@@ -217,17 +217,23 @@
           };
       var mapObject = new google.maps.Map(document.getElementById("map" + id_number), myOptions);
           var waypts = []
-	  list = document.getElementsByClassName("ul-"+ id_number);
-	  console.log(list.getElementsByTagName("a"));
-        Waypts({
-          location: "Craiova+Romania",
-          stopover: true
-        });
-        waypts.push({
-          location: "Sacalaz+Romania",
-          stopover: true
-        });
-
+	  var list = document.getElementsByClassName("ul-"+ id_number)[0];
+	  var items = list.getElementsByTagName("li");
+	  for(var i = 0; i < items.length; i++)
+	  {
+			     cities_array = items[i].firstChild.innerHTML;
+			     cities_array = cities_array.split("-")
+			     console.log(cities_array);
+			     waypts.push({
+			     location: cities_array[0] + "+Romania",
+			     stopover: true
+			     });
+			     waypts.push({
+			     location: cities_array[1] + "+Romania",
+			     stopover: true
+			     });
+			     
+	  }
       var directionsService = new google.maps.DirectionsService();
         var directionsRequest = {
           origin: start + "+Romania",
@@ -243,7 +249,6 @@
           {
             if (status == google.maps.DirectionsStatus.OK)
             {
-              console.log(response);
               new google.maps.DirectionsRenderer({
                 map: mapObject,
                 directions: response
