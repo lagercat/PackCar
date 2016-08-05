@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 from phonenumber_field.modelfields import PhoneNumberField
 
+from drivers.models import Driver
+
 
 class Package(models.Model):
     departure = models.CharField(null=True, max_length=300)
@@ -20,5 +22,8 @@ class Package(models.Model):
     package_thickness = models.FloatField(null=True)
     package_weight = models.FloatField(null=True)
     price = models.IntegerField(null=True)
+    accepted = models.BooleanField(default=False)
     phonenumber = PhoneNumberField(null=True)
+    driver = models.ForeignKey(Driver, related_name='packages', blank=True,
+                               null=True)
     slug = models.SlugField(default=uuid.uuid1, unique=True)

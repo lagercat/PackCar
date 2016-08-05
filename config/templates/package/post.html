@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>{% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>PackCar. You deliver what you choose.</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "assets/css/bootstrap.css"%}"rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "assets/css/style.css"%}" rel="stylesheet">
+    <link href="{% static "assets/css/font-awesome.min.css"%}" rel="stylesheet">
+    
+    <script src="{% static "assets/js/modernizr.js"%}"></script>
+  </head>
+
+  <body>
+
+     <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">PackCar</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/"></a></li>
+            <li><a href="/packages">CREATE PACKAGE</a></li>
+            <li><a href="/drivers">CREATE ROUTE</a></li>
+            <li><a href="login.html">COMMANDS MANAGER</a></li>
+            <li><a>{{ request.user.username }}</a></li>
+            <li><a>|</a></li>
+            <li><a href="/logout">log out</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	<!-- *****************************************************************************************************************
+	 TITLE & CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mt">
+	    <form method="POST">
+          {% csrf_token %}
+	 	<div class="row">
+		 	</div>
+		 	<br>
+		 	<div class="col-lg-5 col-lg-offset-1">
+			 	<div class="spacing"></div>
+		 		<img src="{% static "assets/img/box.png"%}"style="height: 300px !important; width: 350px !important;">
+		 	</div>
+		 	
+		 	<div class="col-lg-4 col-lg-offset-1">
+			 	<div class="spacing"></div>
+		 		<h4 style="color:#00b3fe;">Project Details</h4>
+		 		<div class="hline"></div>
+		 		<br>
+		 		<p style="font-size:20px;"><b>Price:</b> {{ package.price }}</p>
+		 		<p style="font-size:20px;"><b>From:</b> {{ package.departure }}</a><b style="margin-left:20px;"> To:</b> {{ package.arrival }}</a></p>
+		 		<p style="font-size:20px;"><b>Date:</b>{{ package.departure_date }}  </a><b  style="margin-left:20px;"> To:</b> {{ package.arrival_date }}</a></p>
+		 		<p style="font-size:20px;"><b>Time:</b> {{ package.departure_time }}</a><b  style="margin-left:20px;"> To:</b>{{ package.arrival_time }}</a></p>
+				<h4>Phone: <span style="font-weight:normal;color:#ff0c4d;">{{ package.phonenumber}}</span></h4>
+		 	    {% if user == package.author%}
+                      <button  class=" btn btn-success" style="margin-right:5px"><a href="/edit_package/{{ package.slug }}" style="color: white;">Edit task </a></button>
+                      <button type="submit" name="deletePost" value='deletePost' style="margin-right:5px" class="btn btn-danger"><span>Delete </span></button>
+                 {% endif %}
+
+		 	</div>
+		 	
+	 	</div><! --/row -->
+	 	</form>
+	 </div><! --/container -->
+	 
+	<!-- *****************************************************************************************************************
+	 PORTFOLIO SECTION
+	 ***************************************************************************************************************** -->
+	 <div id="portfoliowrap">
+        <div class="portfolio-centered">
+        	<h3>Other Services.</h3>
+            <div class="recentitems portfolio">
+				<div class="portfolio-item graphic-design">
+					<div class="he-wrap tpl6">
+					<img src="{% static "assets/img/vectors/student.png"%}" alt="">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Cluj - Lugoj</h3>
+                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
+                                <a data-rel="prettyPhoto" href="assets/img/vectors/student.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+                            
+                <div class="portfolio-item web-design">
+                    <div class="he-wrap tpl6">
+					<img src="{% static "assets/img/vectors/judge.png"%}" alt="">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Sibiu - Bacau</h3>
+                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
+                                <a data-rel="prettyPhoto" href="assets/img/vectors/judge.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        
+                <div class="portfolio-item graphic-design">
+                    <div class="he-wrap tpl6">
+					<img src="{% static "assets/img/vectors/manager.png"%}" alt="">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Iasi - Ovidiu</h3>
+                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
+                                <a data-rel="prettyPhoto" href="assets/img/vectors/manager.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+        
+                <div class="portfolio-item graphic-design">
+                    <div class="he-wrap tpl6">
+					<img src="{% static "assets/img/vectors/croupier.png"%}" alt="">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Uliuc - Pitesti</h3>
+                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
+                                <a data-rel="prettyPhoto" href="" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+
+                <div class="portfolio-item graphic-design">
+                    <div class="he-wrap tpl6">
+					<img src="{% static "assets/img/vectors/loader.png"%}" alt="">
+						<div class="he-view">
+							<div class="bg a0" data-animate="fadeIn">
+                                <h3 class="a1" data-animate="fadeInDown">Teleorman - Suceava</h3>
+                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
+                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_04.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
+                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
+                        	</div><!-- he bg -->
+						</div><!-- he view -->		
+					</div><!-- he wrap -->
+				</div><!-- end col-12 -->
+                                        
+                    
+            </div><!-- portfolio -->
+        </div><!-- portfolio container -->
+	 </div><!--/Portfoliowrap -->
+	 
+	 	 
+
+	<!-- *****************************************************************************************************************
+	 FOOTER
+	 ***************************************************************************************************************** -->
+	 <div id="footerwrap">
+	 	<div class="container">
+		 	<div class="row">
+		 		<div class="col-lg-6">
+		 			<h4>About</h4>
+		 			<div class="hline-w"></div>
+		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 		</div>
+		 		<div class="col-lg-6">
+		 			<h4>Social Links</h4>
+		 			<div class="hline-w"></div>
+		 			<p>
+		 				<a href="#"><i class="fa fa-dribbble"></i></a>
+		 				<a href="#"><i class="fa fa-facebook"></i></a>
+		 				<a href="#"><i class="fa fa-twitter"></i></a>
+		 				<a href="#"><i class="fa fa-instagram"></i></a>
+		 				<a href="#"><i class="fa fa-tumblr"></i></a>
+		 			</p>
+		 		</div>
+		 	
+		 	</div><! --/row -->
+	 	</div><! --/container -->
+	 </div><! --/footerwrap -->
+	 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="{% static "assets/js/bootstrap.min.js"%}"></script>
+	<script src="{% static "assets/js/retina-1.1.0.js"%}"></script>
+	<script src="{% static "assets/js/jquery.hoverdir.js"%}"></script>
+	<script src="{% static "assets/js/jquery.hoverex.min.js"%}"></script>
+	<script src="{% static "assets/js/jquery.prettyPhoto.js"%}"></script>
+  	<script src="{% static "assets/js/jquery.isotope.min.js"%}"></script>
+  	<script src="{% static "assets/js/custom.js"></script>
+
+
+    <script>
+// Portfolio
+(function($) {
+	"use strict";
+	var $container = $('.portfolio'),
+		$items = $container.find('.portfolio-item'),
+		portfolioLayout = 'fitRows';
+		
+		if( $container.hasClass('portfolio-centered') ) {
+			portfolioLayout = 'masonry';
+		}
+				
+		$container.isotope({
+			filter: '*',
+			animationEngine: 'best-available',
+			layoutMode: portfolioLayout,
+			animationOptions: {
+			duration: 750,
+			easing: 'linear',
+			queue: false
+		},
+		masonry: {
+		}
+		}, refreshWaypoints());
+		
+		function refreshWaypoints() {
+			setTimeout(function() {
+			}, 1000);   
+		}
+				
+		$('nav.portfolio-filter ul a').on('click', function() {
+				var selector = $(this).attr('data-filter');
+				$container.isotope({ filter: selector }, refreshWaypoints());
+				$('nav.portfolio-filter ul a').removeClass('active');
+				$(this).addClass('active');
+				return false;
+		});
+		
+		function getColumnNumber() { 
+			var winWidth = $(window).width(), 
+			columnNumber = 1;
+		
+			if (winWidth > 1200) {
+				columnNumber = 5;
+			} else if (winWidth > 950) {
+				columnNumber = 4;
+			} else if (winWidth > 600) {
+				columnNumber = 3;
+			} else if (winWidth > 400) {
+				columnNumber = 2;
+			} else if (winWidth > 250) {
+				columnNumber = 1;
+			}
+				return columnNumber;
+			}       
+			
+			function setColumns() {
+				var winWidth = $(window).width(), 
+				columnNumber = getColumnNumber(), 
+				itemWidth = Math.floor(winWidth / columnNumber);
+				
+				$container.find('.portfolio-item').each(function() { 
+					$(this).css( { 
+					width : itemWidth + 'px' 
+				});
+			});
+		}
+		
+		function setPortfolio() { 
+			setColumns();
+			$container.isotope('reLayout');
+		}
+			
+		$container.imagesLoaded(function () { 
+			setPortfolio();
+		});
+		
+		$(window).on('resize', function () { 
+		setPortfolio();          
+	});
+})(jQuery);
+</script>
+  </body>
+</html>

@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
-from .forms import DriverForm
+from .forms import DriverForm, EditDriverForm
 from .models import Driver
 
 
@@ -13,6 +14,7 @@ def submit_driver(request):
             form.instance.author = request.user
             form.save()
             return redirect('/')
+    print form.errors
     return render(request, "drivers/create-route.html", {
         'form': form})
 
@@ -28,7 +30,29 @@ def list_drivers(request):
 
 @login_required
 def driver(request, slug):
-    drivers = Driver.get_object_or_404(Driver, slug=slug)
-    return render(request, "template.html", {
-        "driver": drivers
+    drivers = get_object_or_404(Driver, slug=slug)
+    if request.method == 'POST':
+        if request.POST.get("deletePost") and drivers.author == request.user:
+            drivers.delete()
+            return redirect('/')
+    return render(request, "drivers/post.html", {
+        "package": drivers,
+        "user": request.user
+    })
+
+
+@login_required
+def edit_drivers(request, slug):
+    post = get_object_or_404(Driver, slug=slug)
+    if post.author != request.user:
+        return HttpResponseForbidden()
+    form = EditDriverForm(request.POST or None, request.FILES or None,
+                          instance=post)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('/driver/' + post.slug)
+    return render(request, 'drivers/edit_rout.html', {
+        'post': post,
+        'form': form,
     })

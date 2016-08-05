@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     {% load staticfiles %}
-    {% load widget_tweaks %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +14,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.vertical-tabs.min.css" %}" rel="stylesheet">
     <link href="{% static "assets/css/datepicker.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.vertical-tabs.css" %}" rel="stylesheet">
     <link href="{% static "assets/css/bootstrap-datetimepicker.min.css" %}" rel="stylesheet">
 
     <!-- Less -->
@@ -26,6 +27,8 @@
     <link href="{% static "assets/css/font-awesome.min.css" %}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
     <script src="{% static "assets/js/modernizr.js" %}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPPjrmt2cREeYWp2Ys-CTpvmGUXF6GINo"></script>
   </head>
 
   <body>
@@ -40,16 +43,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">PackCar</a>
+          <a class="navbar-brand" href="index.html">PackCar.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html"></a></li>
-            <li><a href="/packages">CREATE PACKAGE</a></li>
-            <li><a href="login.html">COMMANDS MANAGER</a></li>
-            <li><a>{{ request.user }}</a></li>
-            <li><a>|</a></li>
-            <li><a href="/logout">log out</a></li>
+            <li><a href="/drivers">CREATE ROUTE</a></li>
+            <li><a href="/manager">COMMANDS MANAGER</a></li>
+            <li><a>{{ request.user.username }}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -67,101 +68,61 @@
 	 		<div class="col-lg-12">
 	 			<! -- Blog Post 1 -->
 		 		<div class="row">
-		 			<h2 class="pull-left" style="margin-right: 15px;">Create Route</h2>
+		 			<h2 class="pull-left" style="margin-right: 15px;">Commands Manager</h2>
 		 		</div>
 		 		<br>
-				<form method="POST">
-				  {% csrf_token %}
-		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Leaving From</label>
-			 				<br>
-			 				<div class="input-group">
-    							  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload"></span></span>
-                                    {{ form.departure|add_class:"form-control"|attr:"aria-described:basic-addon1"|attr:"placeholder: Select the city you are leaving from" }}
-			 				</div>
 
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"> <!-- required for floating -->
+				    <!-- Nav tabs -->
+				    <ul class="nav nav-tabs tabs-left">
+				      {% for route in request.user.drivers.all %}
+				      <!-- Tab1 -->
+				      <li>
+				      	<a href="#tab{{ route.id }}" data-toggle="tab">
+				      	<ul id="vertica-tab-infos">	
+				      		<li>
+				      			<img class="media-object" src="{% static "assets/img/vectors/car-v.png" %}" alt="box-vector">
+					      	</li>
+					      	<li>	
+					      		<h4 class="media-heading" style="color: #00b3fe;">{{ route.departure }} - {{ route.arrival }}</h4>
+								<span>Leaving Date: <b> {{ route.departure_date }}</b></span>
+				      		</li>
+				      	</ul>
+				      	</a>
+				      </li>
+				      {% endfor %}
+				    </ul>
+				</div>
 
-
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Going To</label>
-			 				<br>
-			 				<div class="input-group">
-{{ form.arrival|add_class:"form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Select the city you are going to" }}
-    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-download"></span></span>
-			 				</div>
-			 			</div>
-		 			</div>
-		 		</div>
-		 		<br>
-		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Departure Date</label>
-			 				<br>
-			 				<div class="input-group">
-    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-{{ form.arrival_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Pick up the arrival date"|attr:"dpd1" }}
-			 				</div>
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Arrival Date</label>
-			 				<br>
-			 				<div class="input-group">
-{{ form.departure_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Pick up the arrival date"|attr:"dpd2" }}
-    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-calendar"></span></span>
-			 				</div>
-			 			</div>
-		 			</div>
-		 		</div>
-		 		<br>
-		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Departure Time</label>
-			 				<br>
-			 				<div id="datetimepicker1" class="input-append date">
-						        <div class="input-group">
-							        <span class="add-on input-group-addon" id="basic-addon1">
-							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
-							     	</span>
-{{ form.departure_time|add_class:"form-control"|attr:"placeholder: Pick up the departure time" }}
-
-							    </div>
-						    </div>
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Arrival Time</label>
-			 				<br>
-			 				<div id="datetimepicker2" class="input-append date">
-						        <div class="input-group">
-							  {{ form.arrival_time|add_class:"form-control"|attr:"placeholder: Pick up the arrival time" }}
-							        <span class="add-on input-group-addon" id="basic-addon1">
-							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
-							     	</span>
-							    </div>
-						    </div>
-			 			</div>
-		 			</div>
-		 		</div>
-		 		<br>
-		 		<div class="row">
-		 			<div class="form-group col-lg-12">
-		 				<label>Phone Number</label>
-			 			<br>
-			 			<div class="input-group">
-    						  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-{{ form.phonenumber|add_class:"form-control"|attr:"placeholder: Enter your phonenumber  (ex. +40792111222)"|attr:"aria-describedby:basic-addon1" }}
-			 			</div>
-		 			</div>
-		 		</div>
-				<br>
-		 		<div class="col-lg-12 row">
-		 			<input type="submit" class="btn btn-success" />
-		 		</div>
-				</form>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				    <!-- Tab panes -->
+				    <div class="tab-content">
+				      {% for route in request.user.drivers.all %}
+				      <div class="tab-pane active" id="tab{{ route.id }}">
+				      	<h4>Pearsons who choosed you: <small><i> (choose the pearson you want to help)</i></small></h4>
+				      	<ul id="box-offers" class="ul-{{ route.id }}">
+					  {% for package in route.packages.all %}
+					  {% if package.accepted %}
+					  <li><a> {{ package.departure }}-{{ package.arrival }}</a> <a href="/package/{{ package.slug }}"><b> View the box</b></a></li>
+					  {% else %}
+				      	  <li><input type="checkbox" class="acceptjob" data-id="{{ package.id }}"> {{ package.author.username }}<a href="/package/{{ package.slug }}"><b>  View the box</b></a></li>
+					  {% endif %}
+					  {% endfor %}
+				      	</ul>
+					<script>
+					  var route_id = "{{ route.id }}";
+					  var start = "{{ route.departure }}";
+					  var finish = "{{ route.arrival }}";
+					</script>
+				      	<button class="btn btn-success" onclick="generate(route_id, start, finish)">Plan route</button>
+				      	<br>
+				      	<br>
+				      	<div style="width:400px; height:300px;" id="map{{ route.id }}"></div>
+				      </div>
+				      {% endfor %}
+				    </div>
+				</div>  
+				
 			</div><! --/col-lg-12 -->
 	 		
 	 	</div><! --/row -->
@@ -199,11 +160,11 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 	<script src="{% static "assets/js/retina-1.1.0.js" %}"></script>
 	<script src="{% static "assets/js/jquery.hoverdir.js" %}"></script>
 	<script src="{% static "assets/js/jquery.hoverex.min.js" %}"></script>
-	<script src="{% static "assets/js/jquery.prettyPhoto.js" %}"</script>
+	<script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
   	<script src="{% static "assets/js/jquery.isotope.min.js" %}"></script>
 
   	<!-- Date Picker -->
@@ -234,6 +195,63 @@
 			language: 'eng',
 			pickDate: false
 		});
+	</script>
+	<script>
+	  $(document).ready(function(){
+        $(".acceptjob").change(function(event){
+            var post_id = $(this).data("id");
+            $.post("/accept/", { "package": post_id }, function(response) {
+                 if (response.result == "success") {
+                     $(location).attr('href', '/manager/');
+                 }
+            })
+            return true;
+        });
+    });
+	</script>
+	<script>
+	  function generate(id_number, start, finish){
+	       var myOptions = {
+          zoom: 10,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+      var mapObject = new google.maps.Map(document.getElementById("map" + id_number), myOptions);
+          var waypts = []
+	  list = document.getElementsByClassName("ul-"+ id_number);
+	  console.log(list.getElementsByTagName("a"));
+        Waypts({
+          location: "Craiova+Romania",
+          stopover: true
+        });
+        waypts.push({
+          location: "Sacalaz+Romania",
+          stopover: true
+        });
+
+      var directionsService = new google.maps.DirectionsService();
+        var directionsRequest = {
+          origin: start + "+Romania",
+          destination: finish + "+Romania",
+          optimizeWaypoints: true,
+          waypoints: waypts,
+          travelMode: google.maps.DirectionsTravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.METRIC
+        };
+        directionsService.route(
+          directionsRequest,
+          function(response, status)
+          {
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+              console.log(response);
+              new google.maps.DirectionsRenderer({
+                map: mapObject,
+                directions: response
+              });
+            }
+          }
+          );
+	  }
 	</script>
 
 

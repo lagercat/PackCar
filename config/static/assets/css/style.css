@@ -503,3 +503,12 @@ csmall2 {
     border-color: #c5c5c5;
     border-color: rgba(0,0,0,0.15) rgba(0,0,0,0.15) rgba(0,0,0,0.25);
 }
+
+#vertica-tab-infos li{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#box-offers li{
+	list-style: none;
+}

@@ -1,7 +1,13 @@
-from django.shortcuts import render, get_object_or_404,redirect
+import json
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
-from .forms import PackageForm
+from django.http import HttpResponseForbidden
+
+from .forms import PackageForm,EditPackageForm
 from .models import Package
 
 
@@ -28,7 +34,47 @@ def list_packages(request):
 
 @login_required
 def package(request, slug):
-    package = Package.get_object_or_404(Package, slug=slug)
-    return render(request, "template.html", {
+    package = get_object_or_404(Package, slug=slug)
+    if request.method == 'POST':
+        if request.POST.get("deletePost") and package.author == request.user:
+            package.delete()
+            return redirect('/')
+    return render(request, "package/post.html", {
         "package": package
+    })
+
+
+@login_required
+def manager(request):
+    return render(request, "package/manager.html")
+
+
+@login_required
+@csrf_exempt
+def accept(request):
+    pack_id = request.POST.get("package")
+    context = {"result": "success"}
+    if pack_id:
+        package = Package.objects.get(id=pack_id)
+        package.accepted = True
+        package.save()
+        
+        return HttpResponse(json.dumps(context),
+                            content_type='application/json')
+
+
+@login_required
+def edit_package(request, slug):
+    post = get_object_or_404(Package, slug=slug)
+    if post.author != request.user:
+        return HttpResponseForbidden()
+    form = EditPackageForm(request.POST or None, request.FILES or None,
+                        instance=post)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('/package/' + post.slug)
+    return render(request, 'package/edit_package.html', {
+        'post': post,
+        'form': form,
     })
