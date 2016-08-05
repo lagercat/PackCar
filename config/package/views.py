@@ -1,4 +1,8 @@
-from django.shortcuts import render, get_object_or_404,redirect
+import json
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
 from .forms import PackageForm
@@ -32,3 +36,22 @@ def package(request, slug):
     return render(request, "template.html", {
         "package": package
     })
+
+
+@login_required
+def manager(request):
+    return render(request, "package/manager.html")
+
+
+@login_required
+@csrf_exempt
+def accept(request):
+    pack_id = request.POST.get("package")
+    context = {"result": "success"}
+    if pack_id:
+        package = Package.objects.get(id=pack_id)
+        package.accepted = True
+        package.save()
+        
+        return HttpResponse(json.dumps(context),
+                            content_type='application/json')

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>PackCar. You deliver what you choose.</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.vertical-tabs.min.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/datepicker.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.vertical-tabs.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap-datetimepicker.min.css" %}" rel="stylesheet">
+
+    <!-- Less -->
+    <link href="{% static "assets/less/datepicker.less" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/font-awesome.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <script src="{% static "assets/js/modernizr.js" %}"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">PackCar.</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html"></a></li>
+            <li><a href="/drivers">CREATE ROUTE</a></li>
+            <li><a href="/manager">COMMANDS MANAGER</a></li>
+            <li><a>{{ request.user.username }}</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+	 
+	<!-- *****************************************************************************************************************
+	 BLOG CONTENT
+	 ***************************************************************************************************************** -->
+
+	 <div class="container mtb">
+	 	<div class="row">
+	 	
+	 		<! -- BLOG POSTS LIST -->
+	 		<div class="col-lg-12">
+	 			<! -- Blog Post 1 -->
+		 		<div class="row">
+		 			<h2 class="pull-left" style="margin-right: 15px;">Commands Manager</h2>
+		 		</div>
+		 		<br>
+
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"> <!-- required for floating -->
+				    <!-- Nav tabs -->
+				    <ul class="nav nav-tabs tabs-left">
+				      {% for route in request.user.drivers.all %}
+				      <!-- Tab1 -->
+				      <li>
+				      	<a href="#tab{{ route.id }}" data-toggle="tab">
+				      	<ul id="vertica-tab-infos">	
+				      		<li>
+				      			<img class="media-object" src="{% static "assets/img/vectors/car-v.png" %}" alt="box-vector">
+					      	</li>
+					      	<li>	
+					      		<h4 class="media-heading" style="color: #00b3fe;">{{ route.departure }} - {{ route.arrival }}</h4>
+								<span>Leaving Date: <b> {{ route.departure_date }}</b></span>
+				      		</li>
+				      	</ul>
+				      	</a>
+				      </li>
+				      {% endfor %}
+				    </ul>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				    <!-- Tab panes -->
+				    <div class="tab-content">
+				      {% for route in request.user.drivers.all %}
+				      <div class="tab-pane active" id="tab{{ route.id }}">
+				      	<h4>Pearsons who choosed you: <small><i> (choose the pearson you want to help)</i></small></h4>
+				      	<ul id="box-offers">
+					  {% for package in route.packages.all %}
+					  {% if package.status %}
+					  <li><{{ package.author.username }} <a href="/package/{{ package.slug }}"><b> View the box</b></a></li>
+					  {% else %}
+				      	  <li><input type="checkbox" class="acceptjob" data-id="{{ package.id }}"> {{ package.author.username }}<a href="/package/{{ package.slug }}"><b>  View the box</b></a></li>
+					  {% endif %}
+					  {% endfor %}
+				      	</ul>
+				      	<button class="btn btn-success">Plan route</button>
+				      	<br>
+				      	<br>
+				      	<img src="{% static "assets/img/thumb01.jpg" %}" style="width:400px; height:300px;">
+				      </div>
+				      {% endfor %}
+				    </div>
+				</div>  
+				
+			</div><! --/col-lg-12 -->
+	 		
+	 	</div><! --/row -->
+	 </div><! --/container -->
+
+
+	<!-- *****************************************************************************************************************
+	 FOOTER
+	 ***************************************************************************************************************** -->
+	 <div id="footerwrap">
+	 	<div class="container">
+		 	<div class="row">
+		 		<div class="col-lg-6 col-md-6 col-sm-12">
+		 			<h4>About</h4>
+		 			<div class="hline-w"></div>
+		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 		</div>
+		 		<div class="col-lg-6 col-md-6 col-sm-12">
+		 			<h4>Social Links</h4>
+		 			<div class="hline-w"></div>
+		 			<p>
+		 				<a href="#"><i class="fa fa-dribbble"></i></a>
+		 				<a href="#"><i class="fa fa-facebook"></i></a>
+		 				<a href="#"><i class="fa fa-twitter"></i></a>
+		 				<a href="#"><i class="fa fa-instagram"></i></a>
+		 				<a href="#"><i class="fa fa-tumblr"></i></a>
+		 			</p>
+		 		</div>
+		 	
+		 	</div><! --/row -->
+	 	</div><! --/container -->
+	 </div><! --/footerwrap -->
+	 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	<script src="{% static "assets/js/retina-1.1.0.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverdir.js" %}"></script>
+	<script src="{% static "assets/js/jquery.hoverex.min.js" %}"></script>
+	<script src="{% static "assets/js/jquery.prettyPhoto.js" %}"></script>
+  	<script src="{% static "assets/js/jquery.isotope.min.js" %}"></script>
+
+  	<!-- Date Picker -->
+  	<script src="{% static "assets/js/bootstrap-datepicker.js" %}"></script>
+	<script src="{% static "assets/js/custom.js" %}"></script>
+	<script type="text/javascript"
+     src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script> 
+    <script type="text/javascript"
+     src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+     src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+	<script type="text/javascript">
+		$('#datetimepicker1').datetimepicker({
+			format: 'hh:mm:ss',
+			language: 'eng',
+			pickDate: false
+		});
+	</script>
+	<script type="text/javascript">
+		$('#datetimepicker2').datetimepicker({
+			format: 'hh:mm:ss',
+			language: 'eng',
+			pickDate: false
+		});
+	</script>
+	<script>
+	  $(document).ready(function(){
+        $(".acceptjob").change(function(event){
+            var post_id = $(this).data("id");
+            $.post("/accept/", { "package": post_id }, function(response) {
+                 if (response.result == "success") {
+                     $(location).attr('href', '/manage/');
+                 }
+            })
+            return true;
+        });
+    });
+	</script>
+
+
+  </body>
+</html>
