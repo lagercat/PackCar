@@ -105,7 +105,7 @@
 					  {% if package.accepted %}
 					  <li><a> {{ package.departure }}-{{ package.arrival }}</a> <a href="/package/{{ package.slug }}"><b> View the box</b></a></li>
 					  {% else %}
-				      	  <li><input type="checkbox" class="acceptjob" data-id="{{ package.id }}"> {{ package.author.username }}<a href="/package/{{ package.slug }}"><b>  View the box</b></a></li>
+				      	  <li id="GheorghitaLaPortita"><input type="checkbox" class="acceptjob" data-id="{{ package.id }}"> {{ package.author.username }}<a href="/package/{{ package.slug }}"><b>  View the box</b></a></li>
 					  {% endif %}
 					  {% endfor %}
 				      	</ul>
@@ -222,8 +222,8 @@
 	  for(var i = 0; i < items.length; i++)
 	  {
 			     cities_array = items[i].firstChild.innerHTML;
+			     if(items[i].id != "GheorghitaLaPortita"){
 			     cities_array = cities_array.split("-")
-			     console.log(cities_array);
 			     waypts.push({
 			     location: cities_array[0] + "+Romania",
 			     stopover: true
@@ -232,6 +232,7 @@
 			     location: cities_array[1] + "+Romania",
 			     stopover: true
 			     });
+			     }
 			     
 	  }
       var directionsService = new google.maps.DirectionsService();
