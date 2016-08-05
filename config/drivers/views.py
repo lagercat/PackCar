@@ -29,6 +29,10 @@ def list_drivers(request):
 @login_required
 def driver(request, slug):
     drivers = get_object_or_404(Driver, slug=slug)
+    if request.method == 'POST':
+        if request.POST.get("deletePost") and drivers.author == request.user:
+            drivers.delete()
+            return redirect('/')
     return render(request, "drivers/post.html", {
         "package": drivers
     })
