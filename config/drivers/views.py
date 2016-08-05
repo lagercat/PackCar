@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
-from .forms import DriverForm,EditDriverForm
+from .forms import DriverForm, EditDriverForm
 from .models import Driver
 
 
@@ -36,7 +36,7 @@ def driver(request, slug):
             return redirect('/')
     return render(request, "drivers/post.html", {
         "package": drivers,
-        "user":request.user
+        "user": request.user
     })
 
 
@@ -46,7 +46,7 @@ def edit_drivers(request, slug):
     if post.author != request.user:
         return HttpResponseForbidden()
     form = EditDriverForm(request.POST or None, request.FILES or None,
-                        instance=post)
+                          instance=post)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -55,4 +55,3 @@ def edit_drivers(request, slug):
         'post': post,
         'form': form,
     })
-
