@@ -1,6 +1,6 @@
-#Open Web Info Educatie 2016
+# Open Web Info Educatie 2016
 
-#Componenta Echipei
+# Componenta Echipei
 
 * Emanuel Covaci
 cls XI-a, Liceul Teoretic "G.Moisil" Timisoara
