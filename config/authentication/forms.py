@@ -17,7 +17,6 @@ class LoginForm(forms.Form):
 
 
 class UserRegisterForm(forms.ModelForm):
-    recaptcha = ReCaptchaField()
     retypepassword = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Retype password',
         'label': 'Retype password',
