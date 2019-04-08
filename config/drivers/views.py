@@ -13,8 +13,7 @@ def submit_driver(request):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
-            return redirect('/')
-    print form.errors
+            return redirect('/driver/' + str(form.instance.slug))
     return render(request, "drivers/create-route.html", {
         'form': form})
 
