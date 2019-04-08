@@ -8,7 +8,7 @@ from .models import Package
 class PackageForm(forms.ModelForm):
     class Meta:
         model = Package
-        fields = ['package_width',
+        fields = ['name', 'package_width',
                   'package_height', 'package_thickness', 'package_weight',
                   'price', 'phonenumber']
 
@@ -16,6 +16,6 @@ class PackageForm(forms.ModelForm):
 class EditPackageForm(forms.ModelForm):
     class Meta:
         model = Package
-        fields = ['package_width',
+        fields = ['name', 'package_width',
                   'package_height', 'package_thickness', 'package_weight',
                   'price', 'phonenumber']

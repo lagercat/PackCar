@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
@@ -20,10 +22,18 @@ def submit_driver(request):
 
 @login_required
 def list_drivers(request):
-    drivers = Driver.objects.order_by("-id").all()
+    if request.GET.get("q"):
+        drivers_to = Driver.objects.filter(departure__contains=request.GET.get("q"))
+        drivers_from = Driver.objects.filter(arrival__contains=request.GET.get("q"))
+        drivers = list(chain(drivers_to, drivers_from))
+        greeting = "Here's what we found"
+    else:
+        drivers = Driver.objects.order_by("-id").all()
+        greeting = "Recent Drivers"
     return render(request, "list.html", {
         "type": "Drivers",
-        "drivers": drivers
+        "drivers": drivers,
+        "greeting": greeting,
     })
 
 

@@ -70,6 +70,15 @@
 		 			<h2 class="pull-left" style="margin-right: 15px;">Create Route</h2>
 		 		</div>
 		 		<br>
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for field,errors in form.errors.items %}
+                        {% for error in errors %}
+                            {{ field }}: {{ error }} <br>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
 				<form method="POST">
 				  {% csrf_token %}
 		 		<div class="row">

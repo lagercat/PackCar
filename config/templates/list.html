@@ -60,7 +60,7 @@
 	 		<div class="col-lg-8">
 	 		  <! -- Blog Post 1 -->
 			     <div class="row form-group">
-		 	       <h2 class="pull-left" style="margin-right: 15px;">Recent {{ type }}</h2>
+		 	       <h2 class="pull-left" style="margin-right: 15px;">{{ greeting }}</h2>
 		 	       <br>
 			     </div>
 			     {% if type == "Packages" %}
@@ -91,8 +91,7 @@
 			 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			 			<a href="single-post.html"><h3 class="ctitle">{{ driver.departure }} - {{ driver.arrival }}</h3></a>
 			 			<p> <csmall2>By: {{ driver.author }}</csmall2></p>
-			 			<p><b>Phone Number: </b> {{ driver.phonenumber }}</p>
-			 			<p><a href="/driver/{{ driver.slug }}">[View Car]</a></p>
+			 			<p><a href="/driver/{{ driver.slug }}">[View route]</a></p>
 			 		</div>
 			 	</div>
 		 		<div class="spacing"></div>
@@ -104,29 +103,19 @@
 	 		
 	 		<! -- SIDEBAR -->
 	 		<div class="col-lg-4">
-		 		<h4>Search for some {{ type }}</h4>
+		 		<h4>Search by city</h4>
 		 		<div class="hline"></div>
 		 			<p>
 		 				<br/>
-		 				<input type="text" class="form-control" placeholder="Search something">
+                        <form method="GET">
+                        {% csrf_token %}
+		 				<input name="q" type="text" class="form-control" placeholder="Search something">
+                        <input type="submit" style="visibility: hidden;" />
+                        </form>
 		 			</p>
 		 			
 		 		<div class="spacing"></div>
 		 		
-		 		<h4>Cities</h4>
-		 		<div class="hline"></div>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Timisoara</a> <span class="badge badge-theme pull-right">9</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Bucharest</a> <span class="badge badge-theme pull-right">3</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Sibiu</a> <span class="badge badge-theme pull-right">11</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Constanta</a> <span class="badge badge-theme pull-right">5</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Cluj Napoca</a> <span class="badge badge-theme pull-right">7</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Iasi</a> <span class="badge badge-theme pull-right">12</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Paris</a> <span class="badge badge-theme pull-right">2</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Mako</a> <span class="badge badge-theme pull-right">5</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Roma</a> <span class="badge badge-theme pull-right">21</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> New York</a> <span class="badge badge-theme pull-right">12</span></p>
-
-		 		<div class="spacing"></div>
 		 		
 	 		</div>
 	 	</div><! --/row -->

@@ -10,6 +10,7 @@ from drivers.models import Driver
 
 
 class Package(models.Model):
+    name = models.CharField(null=True, max_length=300)
     author = models.ForeignKey(User, related_name='packages')
     package_width = models.FloatField(null=True)
     package_height = models.FloatField(null=True)
