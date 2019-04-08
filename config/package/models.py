@@ -10,12 +10,6 @@ from drivers.models import Driver
 
 
 class Package(models.Model):
-    departure = models.CharField(null=True, max_length=300)
-    arrival = models.CharField(null=True, max_length=300)
-    departure_date = models.DateField(null=True)
-    arrival_date = models.DateField(null=True)
-    departure_time = models.TimeField(null=True)
-    arrival_time = models.TimeField(null=True)
     author = models.ForeignKey(User, related_name='packages')
     package_width = models.FloatField(null=True)
     package_height = models.FloatField(null=True)

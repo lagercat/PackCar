@@ -18,7 +18,8 @@ def submit_package(request):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
-            return redirect('/')
+            return redirect('/alldrivers')
+    print form.errors
     return render(request, "package/create_package.html", {
         'form': form,
         'user': request.user})

@@ -79,14 +79,17 @@
 			 				<br>
 			 				<div class="input-group">
     							  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload"></span></span>
-{{ form.departure|add_class:"form-control"|attr:"aria-described:basic-addon1"|attr:"placeholder: Select the city you are leaving from" }}
+                                    {{ form.departure|add_class:"form-control"|attr:"aria-described:basic-addon1"|attr:"placeholder:The city you are leaving from" }}
 			 				</div>
+
+
+
 			 			</div>
 			 			<div class="form-group col-lg-6">
 			 				<label>Going To</label>
 			 				<br>
 			 				<div class="input-group">
-{{ form.arrival|add_class:"form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Select the city you are going to" }}
+{{ form.arrival|add_class:"form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder:The city you are going to" }}
     							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-download"></span></span>
 			 				</div>
 			 			</div>
@@ -100,14 +103,14 @@
 			 				<br>
 			 				<div class="input-group">
     							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-{{ form.arrival_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Pick up the arrival date"|attr:"dpd1" }}
+{{ form.arrival_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder:Pick the departure date"|attr:"dpd1" }}
 			 				</div>
 			 			</div>
 			 			<div class="form-group col-lg-6">
 			 				<label>Arrival Date</label>
 			 				<br>
 			 				<div class="input-group">
-{{ form.departure_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder: Pick up the arrival date"|attr:"dpd2" }}
+{{ form.departure_date|add_class:"datepicker form-control"|attr:"aria-described:basic-addon2"|attr:"placeholder:Pick the arrival date"|attr:"dpd2" }}
     							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-calendar"></span></span>
 			 				</div>
 			 			</div>
@@ -123,8 +126,7 @@
 						        <div class="input-group">
 							        <span class="add-on input-group-addon" id="basic-addon1">
 							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
-							     	</span>
-{{ form.departure_time|add_class:"form-control"|attr:"placeholder: Pick up the departure time" }}
+							     	</span>{{ form.departure_time|add_class:"form-control"|attr:"placeholder:Pick the departure time" }}
 
 							    </div>
 						    </div>
@@ -134,7 +136,7 @@
 			 				<br>
 			 				<div id="datetimepicker2" class="input-append date">
 						        <div class="input-group">
-							  {{ form.arrival_time|add_class:"form-control"|attr:"placeholder: Pick up the arrival time" }}
+							  {{ form.arrival_time|add_class:"form-control"|attr:"placeholder:Pick the arrival time" }}
 							        <span class="add-on input-group-addon" id="basic-addon1">
 							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
 							     	</span>
@@ -150,7 +152,7 @@
 			 			<br>
 			 			<div class="input-group">
     						  <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-phone"></span></span>
-{{ form.phonenumber|add_class:"form-control"|attr:"placeholder: Enter your phonenumber  (ex. +40792111222)"|attr:"aria-describedby:basic-addon1" }}
+{{ form.phonenumber|add_class:"form-control"|attr:"placeholder: Enter your phone number  (ex. +40792111222)"|attr:"aria-describedby:basic-addon1" }}
 			 			</div>
 		 			</div>
 		 		</div>
