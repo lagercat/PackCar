@@ -22,3 +22,17 @@ class Package(models.Model):
     driver = models.ForeignKey(Driver, related_name='packages', blank=True,
                                null=True)
     slug = models.SlugField(default=uuid.uuid1, unique=True)
+    
+
+class Offer(models.Model):
+    driver = models.ForeignKey(Driver, related_name='offers', blank=True,
+                               null=True)
+    package = models.ForeignKey(Package, related_name='offers', blank=True,
+                               null=True)
+    driver_user = models.ForeignKey(User, related_name='received_offers', blank=True,
+                               null=True)
+    package_user = models.ForeignKey(User, related_name='sent_offers', blank=True,
+                               null=True)
+
+    accepted = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)

@@ -38,8 +38,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/"></a></li>
             <li><a href="/packages">CREATE PACKAGE</a></li>
-            <li><a href="/drivers">CREATE ROUTE</a></li>
-            <li><a href="login.html">COMMANDS MANAGER</a></li>
+            <li><a href="/manager">NOTIFICATIONS</a></li>
             <li><a>{{ request.user.username }}</a></li>
             <li><a>|</a></li>
             <li><a href="/logout">log out</a></li>
@@ -76,7 +75,22 @@
                       <button  class=" btn btn-success" style="margin-right:5px"><a href="/edit_drivers/{{ package.slug }}" style="color: white;">Edit task </a></button>
                       <button type="submit" name="deletePost" value='deletePost' style="margin-right:5px" class="btn btn-danger"><span>Delete </span></button>
                 {% else %}
-                      <button  class=" btn btn-warning" style="margin-right:5px"><a href="/send/{{ package.slug }}" style="color: white;">Send a package</a></button>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <span id="basic-addon1"><span></span></span>
+                                    <select name="package-id" class="form-control" aria-describedby=basic-addon1 required>
+                                        <option selected></option>
+                                        {% for package in packages %}
+                                            <option value="{{ package.id }}">{{ package.name }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                         </div>
+                      <button name="send_package" type="submit" class=" btn btn-warning" style="margin-right:5px"><a style="color: white;">Send a package</a></button>
+                      </form>
+
                 {% endif %}
 		 	</div>
 		 	

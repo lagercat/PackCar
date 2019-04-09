@@ -6,6 +6,7 @@ from django.http import HttpResponseForbidden
 
 from .forms import DriverForm, EditDriverForm
 from .models import Driver
+from package.models import Package, Offer
 
 
 @login_required
@@ -44,9 +45,16 @@ def driver(request, slug):
         if request.POST.get("deletePost") and drivers.author == request.user:
             drivers.delete()
             return redirect('/')
+        else:
+            package_id = request.POST.get("package-id")
+            package = get_object_or_404(Package, id=package_id)
+            offer = Offer(driver=drivers, package=package, driver_user=drivers.author, package_user=package.author)
+            offer.save()
+            
     return render(request, "drivers/post.html", {
         "package": drivers,
-        "user": request.user
+        "user": request.user,
+        "packages": Package.objects.filter(author=request.user)
     })
 
 
