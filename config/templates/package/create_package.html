@@ -45,9 +45,7 @@
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li class="active"><a href="index.html"></a></li>
-            <li><a href="/drivers">CREATE ROUTE</a></li>
-            <li><a href="/manager">COMMANDS MANAGER</a></li>
-            <li><a>Hello {{ user.username }}   !</a></li>
+            <li><a>Hello {{ user.username }}!</a></li>
             <li><a>|</a></li>
             <li><a href="/logout">LOG OUT</a></li>
           </ul>
@@ -70,26 +68,26 @@
 		 			<h2 class="pull-left" style="margin-right: 15px;">Create Package</h2>
 		 		</div>
 		 		<br>
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for field,errors in form.errors.items %}
+                        {% for error in errors %}
+                            {{ field }}: {{ error }} <br>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
 		 		<form method="post">
 				{% csrf_token %}
 		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Leaving From</label>
-			 				<br>
-			 				<div class="input-group">
-    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-upload"></span></span>
+		 			<div class="form-group col-lg-12">
+		 				<label>Name</label>
+			 			<br>
+			 			<div class="input-group">
+    						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-heart"></span></span>
 
-			 					{{ form.departure|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are leaving from"}}
-			 				</div>
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Going To</label>
-			 				<br>
-			 				<div class="input-group">
-			 					{{ form.arrival|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are going to"}}
-    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-download"></span></span>
-			 				</div>
+			 				{{ form.name|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Name"}}
+
 			 			</div>
 		 			</div>
 		 		</div>
@@ -97,7 +95,7 @@
 		 		<div class="row">
 		 			<div class="form-group">
 		 				<div class="form-group col-lg-3">
-			 				<label>Package Height</label>
+			 				<label>Package Height(cm)</label>
 			 				<br>
 			 				<div class="input-group">
     							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
@@ -106,7 +104,7 @@
 			 				</div>
 			 			</div>
 			 			<div class="form-group col-lg-3">
-			 				<label>Package Width</label>
+			 				<label>Package Width(cm)</label>
 			 				<br>
 			 				<div class="input-group">
     							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
@@ -115,76 +113,23 @@
 			 				</div>
 			 			</div>
 			 			<div class="form-group col-lg-3">
-			 				<label>Package Thickness</label>
+			 				<label>Package Thickness(cm)</label>
 			 				<br>
 			 				<div class="input-group">
-    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
 
 			 					{{ form.package_thickness|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Select the city you are leaving from"}}
+                                    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-gift"></span></span>
+
 			 				</div>
 			 			</div>
 			 			<div class="form-group col-lg-3">
-			 				<label>Package Weight</label>
+			 				<label>Package Weight(grams)</label>
 			 				<br>
 			 				<div class="input-group">
 
 			 					{{ form.package_weight|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon2"|attr:"placeholder:Package Weight"}}
     							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-gift"></span></span>
 			 				</div>
-			 			</div>
-		 			</div>
-		 		</div>
-		 		<br>
-		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Leaving Date</label>
-			 				<br>
-			 				<div class="input-group">
-    							<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span></span>
-
-			 					{{ form.departure_date|add_class:"datepicker form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Leaving Date"|attr:"id:dpd1"}}
-			 				</div>
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Arrival Date</label>
-			 				<br>
-			 				<div class="input-group">
-
-			 					{{ form.arrival_date|add_class:"datepicker form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon2"|attr:"placeholder:Arrival Date"|attr:"id:dpd2"}}
-    							<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-calendar"></span></span>
-			 				</div>
-			 			</div>
-		 			</div>
-		 		</div>
-		 		<br>
-		 		<div class="row">
-		 			<div class="form-group">
-		 				<div class="form-group col-lg-6">
-			 				<label>Departure Time</label>
-			 				<br>
-			 				<div id="datetimepicker1" class="input-append date">
-						        <div class="input-group">
-							        <span class="add-on input-group-addon" id="basic-addon1">
-							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
-							     	</span>
-
-							        {{ form.departure_time|add_class:"form-control"|attr:"required:required"|attr:"placeholder:Pick up the arrival time Departure Time"}}
-							    </div>
-						    </div>
-			 			</div>
-			 			<div class="form-group col-lg-6">
-			 				<label>Arrival Time</label>
-			 				<br>
-			 				<div id="datetimepicker2" class="input-append date">
-						        <div class="input-group">
-
-							        {{ form.arrival_time|add_class:"form-control"|attr:"required:required"|attr:"placeholder:Pick up the arrival time"}}
-							        <span class="add-on input-group-addon" id="basic-addon1">
-							        	<span  data-time-icon="icon-time" data-date-icon="icon-calendar" class="glyphicon glyphicon-time"></span>
-							     	</span>
-							    </div>
-						    </div>
 			 			</div>
 		 			</div>
 		 		</div>
@@ -232,13 +177,12 @@
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

@@ -24,7 +24,7 @@
 
      <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
+      <div class="container"fn>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -91,6 +91,7 @@
         <div class="portfolio-centered">
         	<h3>Other Services.</h3>
             <div class="recentitems portfolio">
+                {% for route in routes %}
 				<div class="portfolio-item graphic-design">
 					<div class="he-wrap tpl6">
 					<img src="{% static "assets/img/vectors/student.png"%}" alt="">
@@ -104,7 +105,7 @@
 						</div><!-- he view -->		
 					</div><!-- he wrap -->
 				</div><!-- end col-12 -->
-                            
+                {% endfor %}
                 <div class="portfolio-item web-design">
                     <div class="he-wrap tpl6">
 					<img src="{% static "assets/img/vectors/judge.png"%}" alt="">
@@ -177,13 +178,12 @@
 		 		<div class="col-lg-6">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

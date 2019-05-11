@@ -40,8 +40,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/"></a></li>
             <li><a href="/packages">CREATE PACKAGE</a></li>
-            <li><a href="/drivers">CREATE ROUTE</a></li>
-            <li><a href="/manager">COMMANDS MANAGER</a></li>
+            <li><a href="/manager">NOTIFICATIONS</a></li>
             <li><a>{{ request.user.username }}</a></li>
             <li><a>|</a></li>
             <li><a href="/logout">log out</a></li>
@@ -62,7 +61,7 @@
 	 		<div class="col-lg-8">
 	 		  <! -- Blog Post 1 -->
 			     <div class="row form-group">
-		 	       <h2 class="pull-left" style="margin-right: 15px;">Recent {{ type }}</h2>
+		 	       <h2 class="pull-left" style="margin-right: 15px;">{{ greeting }}</h2>
 		 	       <br>
 			     </div>
 			     {% if type == "Packages" %}
@@ -93,8 +92,7 @@
 			 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			 			<a href="single-post.html"><h3 class="ctitle">{{ driver.departure }} - {{ driver.arrival }}</h3></a>
 			 			<p> <csmall2>By: {{ driver.author }}</csmall2></p>
-			 			<p><b>Phone Number: </b> {{ driver.phonenumber }}</p>
-			 			<p><a href="/driver/{{ driver.slug }}">[View Car]</a></p>
+			 			<p><a href="/driver/{{ driver.slug }}">[View route]</a></p>
 			 		</div>
 			 	</div>
 		 		<div class="spacing"></div>
@@ -106,29 +104,19 @@
 	 		
 	 		<! -- SIDEBAR -->
 	 		<div class="col-lg-4">
-		 		<h4>Search for some {{ type }}</h4>
+		 		<h4>Search by city</h4>
 		 		<div class="hline"></div>
 		 			<p>
 		 				<br/>
-		 				<input type="text" class="form-control" placeholder="Search something">
+                        <form method="GET">
+                        {% csrf_token %}
+		 				<input name="q" type="text" class="form-control" placeholder="Search something">
+                        <input type="submit" style="visibility: hidden;" />
+                        </form>
 		 			</p>
 		 			
 		 		<div class="spacing"></div>
 		 		
-		 		<h4>Cities</h4>
-		 		<div class="hline"></div>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Timisoara</a> <span class="badge badge-theme pull-right">9</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Bucharest</a> <span class="badge badge-theme pull-right">3</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Sibiu</a> <span class="badge badge-theme pull-right">11</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Constanta</a> <span class="badge badge-theme pull-right">5</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Cluj Napoca</a> <span class="badge badge-theme pull-right">7</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Iasi</a> <span class="badge badge-theme pull-right">12</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Paris</a> <span class="badge badge-theme pull-right">2</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Mako</a> <span class="badge badge-theme pull-right">5</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> Roma</a> <span class="badge badge-theme pull-right">21</span></p>
-			 		<p><a href="#"><i class="fa fa-angle-right"></i> New York</a> <span class="badge badge-theme pull-right">12</span></p>
-
-		 		<div class="spacing"></div>
 		 		
 	 		</div>
 	 	</div><! --/row -->
@@ -144,13 +132,12 @@
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

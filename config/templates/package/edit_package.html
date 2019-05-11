@@ -62,7 +62,7 @@
 
 	 <div class="container mtb">
 	 	<div class="row">
-	 	
+
 	 		<! -- BLOG POSTS LIST -->
 	 		<div class="col-lg-12">
 	 			<! -- Blog Post 1 -->
@@ -70,8 +70,30 @@
 		 			<h2 class="pull-left" style="margin-right: 15px;">Create Package</h2>
 		 		</div>
 		 		<br>
+                {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {% for field,errors in form.errors.items %}
+                        {% for error in errors %}
+                            {{ field }}: {{ error }} <br>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
 		 		<form method="post">
 				{% csrf_token %}
+		 		<div class="row">
+		 			<div class="form-group col-lg-12">
+		 				<label>Name</label>
+			 			<br>
+			 			<div class="input-group">
+    						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-heart"></span></span>
+
+			 				{{ form.name|add_class:"form-control"|attr:"required:required"|attr:"aria-describedby=basic-addon1"|attr:"placeholder:Name"}}
+
+			 			</div>
+		 			</div>
+		 		</div>
+		 		<br>
 		 		<div class="row">
 		 			<div class="form-group">
 		 				<div class="form-group col-lg-6">
@@ -232,13 +254,12 @@
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

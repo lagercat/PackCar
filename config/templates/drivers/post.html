@@ -38,8 +38,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/"></a></li>
             <li><a href="/packages">CREATE PACKAGE</a></li>
-            <li><a href="/drivers">CREATE ROUTE</a></li>
-            <li><a href="login.html">COMMANDS MANAGER</a></li>
+            <li><a href="/manager">NOTIFICATIONS</a></li>
             <li><a>{{ request.user.username }}</a></li>
             <li><a>|</a></li>
             <li><a href="/logout">log out</a></li>
@@ -69,101 +68,35 @@
 		 		<div class="hline"></div>
 		 		<br>
 		 		<p style="font-size:20px;"><b>From:</b> {{ package.departure }}</a><b style="margin-left:20px;"> To:</b> {{ package.arrival }}</a></p>
-		 		<p style="font-size:20px;"><b>Date:</b>{{ package.departure_date }}  </a><b  style="margin-left:20px;"> To:</b> {{ package.arrival_date }}</a></p>
-		 		<p style="font-size:20px;"><b>Time:</b> {{ package.departure_time }}</a><b  style="margin-left:20px;"> To:</b>{{ package.arrival_time }}</a></p>
-				<h4>Phone: <span style="font-weight:normal;color:#ff0c4d;">{{ package.phonenumber}}</span></h4>
+		 		<p style="font-size:20px;"><b>Date:</b> {{ package.departure_date }}  </a><b  style="margin-left:20px;"> To:</b> {{ package.arrival_date }}</a></p>
+		 		<p style="font-size:20px;"><b>Time:</b> {{ package.departure_time }}</a><b  style="margin-left:20px;"> To:</b> {{ package.arrival_time }}</a></p>
 
 		 	    {% if user == package.author%}
                       <button  class=" btn btn-success" style="margin-right:5px"><a href="/edit_drivers/{{ package.slug }}" style="color: white;">Edit task </a></button>
                       <button type="submit" name="deletePost" value='deletePost' style="margin-right:5px" class="btn btn-danger"><span>Delete </span></button>
-                 {% endif %}
+                {% else %}
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-lg-12">
+                                <span id="basic-addon1"><span></span></span>
+                                    <select name="package-id" class="form-control" aria-describedby=basic-addon1 required>
+                                        <option selected></option>
+                                        {% for package in packages %}
+                                            <option value="{{ package.id }}">{{ package.name }}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                         </div>
+                      <button name="send_package" type="submit" class=" btn btn-warning" style="margin-right:5px"><a style="color: white;">Send a package</a></button>
+                      </form>
+
+                {% endif %}
 		 	</div>
 		 	
 	 	</div><! --/row -->
 	 	</form>
 	 </div><! --/container -->
-	 
-	<!-- *****************************************************************************************************************
-	 PORTFOLIO SECTION
-	 ***************************************************************************************************************** -->
-	 <div id="portfoliowrap">
-        <div class="portfolio-centered">
-        	<h3>Other Services.</h3>
-            <div class="recentitems portfolio">
-				<div class="portfolio-item graphic-design">
-					<div class="he-wrap tpl6">
-					<img src="{% static "assets/img/vectors/student.png"%}" alt="">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Cluj - Lugoj</h3>
-                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
-                                <a data-rel="prettyPhoto" href="assets/img/vectors/student.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-                            
-                <div class="portfolio-item web-design">
-                    <div class="he-wrap tpl6">
-					<img src="{% static "assets/img/vectors/judge.png"%}" alt="">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Sibiu - Bacau</h3>
-                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
-                                <a data-rel="prettyPhoto" href="assets/img/vectors/judge.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-        
-                <div class="portfolio-item graphic-design">
-                    <div class="he-wrap tpl6">
-					<img src="{% static "assets/img/vectors/manager.png"%}" alt="">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Iasi - Ovidiu</h3>
-                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
-                                <a data-rel="prettyPhoto" href="assets/img/vectors/manager.png" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-        
-                <div class="portfolio-item graphic-design">
-                    <div class="he-wrap tpl6">
-					<img src="{% static "assets/img/vectors/croupier.png"%}" alt="">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Uliuc - Pitesti</h3>
-                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
-                                <a data-rel="prettyPhoto" href="" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-
-                <div class="portfolio-item graphic-design">
-                    <div class="he-wrap tpl6">
-					<img src="{% static "assets/img/vectors/loader.png"%}" alt="">
-						<div class="he-view">
-							<div class="bg a0" data-animate="fadeIn">
-                                <h3 class="a1" data-animate="fadeInDown">Teleorman - Suceava</h3>
-                                <h5 class="a1" data-animate="fadeInDown">25.07.2016</h5>
-                                <a data-rel="prettyPhoto" href="assets/img/portfolio/portfolio_04.jpg" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-search"></i></a>
-                                <a href="single-project.html" class="dmbutton a2" data-animate="fadeInUp"><i class="fa fa-link"></i></a>
-                        	</div><!-- he bg -->
-						</div><!-- he view -->		
-					</div><!-- he wrap -->
-				</div><!-- end col-12 -->
-                                        
-                    
-            </div><!-- portfolio -->
-        </div><!-- portfolio container -->
-	 </div><!--/Portfoliowrap -->
 	 
 	 	 
 
@@ -176,13 +109,12 @@
 		 		<div class="col-lg-6">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

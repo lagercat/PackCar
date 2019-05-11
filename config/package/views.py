@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
 from .forms import PackageForm,EditPackageForm
-from .models import Package
+from .models import Package, Offer
 
 
 @login_required
@@ -18,7 +18,8 @@ def submit_package(request):
         if form.is_valid():
             form.instance.author = request.user
             form.save()
-            return redirect('/')
+            return redirect('/alldrivers')
+    print form.errors
     return render(request, "package/create_package.html", {
         'form': form,
         'user': request.user})
@@ -30,7 +31,7 @@ def list_packages(request):
     return render(request, "list.html", {
         "type": "Packages",
         "packages": packages})
-
+    
 
 @login_required
 def package(request, slug):
@@ -46,21 +47,42 @@ def package(request, slug):
 
 @login_required
 def manager(request):
-    return render(request, "package/manager.html")
+    if request.method == 'POST':
+        print "dd"
+    return render(request, "package/manager.html", {
+
+    })
 
 
 @login_required
 @csrf_exempt
-def accept(request):
-    pack_id = request.POST.get("package")
-    context = {"result": "success"}
-    if pack_id:
-        package = Package.objects.get(id=pack_id)
-        package.accepted = True
-        package.save()
-        
-        return HttpResponse(json.dumps(context),
-                            content_type='application/json')
+def accept(request, slug):
+    offer = get_object_or_404(Offer, id=slug)
+    if offer.driver_user != request.user:
+        return HttpResponseForbidden()
+    offer.accepted = True
+    offer.save()
+    return redirect('/manager')
+
+@login_required
+@csrf_exempt
+def decline(request, slug):
+    offer = get_object_or_404(Offer, id=slug)
+    if offer.driver_user != request.user:
+        return HttpResponseForbidden()
+    offer.delete()
+    return redirect('/manager')
+
+
+@login_required
+@csrf_exempt
+def finish(request, slug):
+    offer = get_object_or_404(Offer, id=slug)
+    if offer.driver_user != request.user:
+        return HttpResponseForbidden()
+    offer.completed = True
+    offer.save()
+    return redirect('/manager')
 
 
 @login_required

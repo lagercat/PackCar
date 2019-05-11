@@ -43,14 +43,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">PackCar.</a>
+          <a class="navbar-brand" href="/">PackCar.</a>
         </div>
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html"></a></li>
-            <li><a href="/drivers">CREATE ROUTE</a></li>
-            <li><a href="/manager">COMMANDS MANAGER</a></li>
+            <li class="active"><a href="/"></a></li>
+            <li><a href="/packages">CREATE PACKAGE</a></li>
+            <li><a href="/manager">NOTIFICATIONS</a></li>
             <li><a>{{ request.user.username }}</a></li>
+            <li><a>|</a></li>
+            <li><a href="/logout">log out</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -68,34 +70,72 @@
 	 		<div class="col-lg-12">
 	 			<! -- Blog Post 1 -->
 		 		<div class="row">
-		 			<h2 class="pull-left" style="margin-right: 15px;">Commands Manager</h2>
+		 			<h2 class="pull-left" style="margin-right: 15px;">Notifications centre</h2>
 		 		</div>
 		 		<br>
 
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12"> <!-- required for floating -->
 				    <!-- Nav tabs -->
-				    <ul class="nav nav-tabs tabs-left">
-				      {% for route in request.user.drivers.all %}
+				      {% for package in request.user.sent_offers.all %}
+                    <ul class="nav nav-tabs">
 				      <!-- Tab1 -->
 				      <li>
-				      	<a href="#tab{{ route.id }}" data-toggle="tab">
+				      	<a data-toggle="tab">
+				      	<ul id="vertica-tab-infos">	
+				      		<li>
+				      			<img class="media-object" src="{% static "assets/img/vectors/box-v.png" %}" alt="box-vector">
+					      	</li>
+					      	<li>	
+					      		<h4 class="media-heading" style="color: #00b3fe;">{{ package.driver.departure }} - {{ package.driver.arrival }}</h4>
+								<span>Leaving Date: <b> {{ package.driver.departure_date }}</b></span>
+				      		</li>
+				      	</ul>
+				      	</a>
+                          {% if package.accepted == False %}
+                            <p>Wait for your driver to accept your package!</p>
+                          {% elif package.completed == False %}
+                             <p>The driver accepted your package, here's their number: {{ package.driver.phonenumber }}</p>
+                          {% elif package.completed == True %}
+                                <p>Delivery finished</p>
+                          {% endif %}
+				      </li>
+                    </ul>
+				      {% endfor %}
+                       {% for route in request.user.received_offers.all %}
+				      <!-- Tab1 -->
+                                        <ul class="nav nav-tabs">
+
+				      <li>
+				      	<a data-toggle="tab">
 				      	<ul id="vertica-tab-infos">	
 				      		<li>
 				      			<img class="media-object" src="{% static "assets/img/vectors/car-v.png" %}" alt="box-vector">
 					      	</li>
 					      	<li>	
-					      		<h4 class="media-heading" style="color: #00b3fe;">{{ route.departure }} - {{ route.arrival }}</h4>
-								<span>Leaving Date: <b> {{ route.departure_date }}</b></span>
+					      		<h4 class="media-heading" style="color: #00b3fe;">{{ route.driver.departure }} - {{ route.driver.arrival }}</h4>
+								<span>Leaving Date: <b> {{ route.driver.departure_date }}</b></span>
 				      		</li>
 				      	</ul>
 				      	</a>
+                        {% if route.accepted == False %}
+                        <a href="/accept/{{route.id}}"><button type="button" class="btn btn-success">Accept</button></a>
+                        <a href="/decline/{{route.id}}"><button type="button" class="btn btn-danger">Decline</button></form></a>
+                        {% elif route.completed == False %}
+                        <p>Here's your client's number: {{ route.package.phonenumber }}</p>
+                        <a href="/finish/{{route.id}}"><button type="button" class="btn btn-success">Finish delivery</button></a>
+                        {% elif route.completed == True %}
+                        <p>Delivery finished</p>
+                        {% endif %}
+                        <br>
 				      </li>
+                                    </ul>
+
 				      {% endfor %}
-				    </ul>
 				</div>
+<!--
 
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-				    <!-- Tab panes -->
+				     Tab panes 
 				    <div class="tab-content">
 				      {% for route in request.user.drivers.all %}
 				      <div class="tab-pane active" id="tab{{ route.id }}">
@@ -122,6 +162,7 @@
 				      {% endfor %}
 				    </div>
 				</div>  
+-->
 				
 			</div><! --/col-lg-12 -->
 	 		
@@ -138,13 +179,12 @@
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>About</h4>
 		 			<div class="hline-w"></div>
-		 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+		 			<p>Our platform was meant to help others with some services, specific for delivering our customers products. We trustly encourage others to use it because we are fully responsable for any bad incidents that may ever appear.</p>
 		 		</div>
 		 		<div class="col-lg-6 col-md-6 col-sm-12">
 		 			<h4>Social Links</h4>
 		 			<div class="hline-w"></div>
 		 			<p>
-		 				<a href="#"><i class="fa fa-dribbble"></i></a>
 		 				<a href="#"><i class="fa fa-facebook"></i></a>
 		 				<a href="#"><i class="fa fa-twitter"></i></a>
 		 				<a href="#"><i class="fa fa-instagram"></i></a>

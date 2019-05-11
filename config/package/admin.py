@@ -1,10 +1,16 @@
 from django.contrib import admin
 
-from .models import Package
+from .models import Package, Offer
 
 
 class PackageAdmin(admin.ModelAdmin):
     list_display = ['author']
-    ordering = ['departure_date']
+    
+
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ['accepted']
+
 
 admin.site.register(Package, PackageAdmin)
+admin.site.register(Offer, OfferAdmin)
+
